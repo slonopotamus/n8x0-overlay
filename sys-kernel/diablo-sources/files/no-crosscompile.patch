@@ -1,0 +1,12 @@
+diff -ur kernel-source-diablo-2.6.21.orig/kernel-source/Makefile kernel-source-diablo-2.6.21/kernel-source/Makefile
+--- kernel-source-diablo-2.6.21.orig/kernel-source/Makefile	2009-02-10 08:42:03.000000000 +0300
++++ kernel-source-diablo-2.6.21/kernel-source/Makefile	2009-02-10 08:50:33.000000000 +0300
+@@ -188,7 +188,7 @@
+ # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
+ 
+ ARCH		?= $(SUBARCH)
+-CROSS_COMPILE	?= arm-linux-
++#CROSS_COMPILE	?= arm-linux-
+ 
+ # Architecture as present in compile.h
+ UTS_MACHINE := $(ARCH)

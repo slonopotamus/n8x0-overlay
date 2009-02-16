@@ -1,0 +1,36 @@
+diff -ur nokia-tablets-pointercal.orig/debian/nokia-tablets-pointercal.init nokia-tablets-pointercal/debian/nokia-tablets-pointercal.init
+--- nokia-tablets-pointercal.orig/debian/nokia-tablets-pointercal.init	2008-12-28 13:38:31.000000000 +0300
++++ nokia-tablets-pointercal/debian/nokia-tablets-pointercal.init	2009-02-09 17:28:03.000000000 +0300
+@@ -1,7 +1,12 @@
+-#!/bin/sh
++#!/sbin/runscript
+ 
+-case "$1" in
+-  start)
++description="Setups tslib touchscreen calibration data file."
++
++depend() {
++	before xdm
++}
++
++start() {
+     if [ ! -e /etc/pointercal.default ]; then
+         panel=`cat /sys/devices/platform/omapfb/panel/name`
+         hwver=`cat /proc/component_version 2> /dev/null |
+@@ -26,15 +31,4 @@
+     if [ ! -r /etc/pointercal ]; then
+         cp /etc/pointercal.default /etc/pointercal
+     fi
+-    
+-    ;;
+-
+-  stop)
+-    ;;
+-
+-  *)
+-    echo "Usage: $0 {start|stop}"
+-    exit 1
+-    ;;
+-
+-esac
++}

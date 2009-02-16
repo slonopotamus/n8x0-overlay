@@ -1,0 +1,88 @@
+diff -ur nit-bootmenu-compat.orig/etc/init.d/nit-boot-basics nit-bootmenu-compat/etc/init.d/nit-boot-basics
+--- nit-bootmenu-compat.orig/etc/init.d/nit-boot-basics	2009-02-05 08:40:06.000000000 +0300
++++ nit-bootmenu-compat/etc/init.d/nit-boot-basics	2009-02-05 20:03:13.000000000 +0300
+@@ -1,26 +1,9 @@
+-#!/bin/sh
+-### BEGIN INIT INFO
+-# Provides:          nit-boot-basics
+-# Required-Start:    udev
+-# Required-Stop:     
+-# Default-Start:     S
+-# Default-Stop:
+-# Short-Description: Start daemon at boot time
+-# Description:       Enable service provided by daemon.
+-### END INIT INFO
+-
+-
+-tablet_setup()
+-{
+-	if [ -L /var/run ]; then
+-		# WARNING: This install has been corrupted!
+-		/sbin/fb-progress -b 000000 -p ff0000 -c -l /usr/share/incompatible-bootmenu.jpg -i 100 -o 100
+-		sleep 15		
+-		reboot -f
+-	fi
+-	
+-	mount --move /tmp /boot/tmp
++#!/sbin/runscript
+ 
++description="Adjusts NIT kernel parameters for better powersaving."
++
++start() {
++	ebegin "Adjusting kernel parameters"
+ 	# activate lowmem module
+ 	echo 92 > /proc/sys/vm/lowmem_deny_watermark
+ 	echo 85 > /proc/sys/vm/lowmem_notify_high
+@@ -48,22 +31,6 @@
+         echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+         echo "49152 65535" > /proc/sys/net/ipv4/ip_local_port_range
+         echo 6000 > /sys/class/bluetooth/hci0/idle_timeout
+-
+-        rdev="$(mountpoint -d /)"
+-        mknod -m 600 /lib/init/rw/rootdev b ${rdev%:*} ${rdev#*:}
+-        set > /boot/tmp/env
+-	fsck -y /lib/init/rw/rootdev > /boot/tmp/bootbasics.log 2>&1
+-	                        
++	eend 0
+ }
+ 
+-case "$1" in
+-        start|restart|force-reload)
+-        tablet_setup
+-        ;;
+-        stop)
+-        ;;
+-        *)
+-        echo "Usage: /etc/init.d/nit-boot-basics {start|stop|restart|force-reload}" >&2
+-        exit 3
+-        ;;
+-esac
+diff -ur nit-bootmenu-compat.orig/linuxrc nit-bootmenu-compat/linuxrc
+--- nit-bootmenu-compat.orig/linuxrc	2009-02-05 08:40:06.000000000 +0300
++++ nit-bootmenu-compat/linuxrc	2009-02-05 08:41:43.000000000 +0300
+@@ -4,24 +4,18 @@
+ if [ x$MER_IN_FILE = "x1" ]; then
+ 	ROOT_PLACE=/mnt/new_root/mer_tmp
+ fi
+-text2screen -c
+-text2screen -s 2 -H center -y 20 -T 0 -t "Booting Mer .."
+ /usr/sbin/dsmetool --root-mounted 
+ mount -o bind /tmp $ROOT_PLACE/tmp
+-text2screen -s 2 -H center -y 40 -T 0 -t "enabling ondemand governor..."
+ if [ -f  /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
+ 	echo -n "Enabling ondemand governor..."
+         echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+         echo "done."
+ fi
+ 
+-text2screen -s 2 -H center -y 60 -T 0 -t "pushing the BT address.."
+ echo "Pushing the BT address"
+ /usr/bin/bt-cal `/usr/sbin/bootstate`
+-text2screen -s 2 -H center -y 80 -T 0 -t "setting time from retu.."
+ /usr/bin/retutime -i || true
+ 
+ cd $ROOT_PLACE
+-text2screen -s 2 -H center -y 100 -T 0 -t "pivot root and starting /sbin/init.."
+ pivot_root . mnt/initfs
+-exec /usr/sbin/chroot . /sbin/init 2 <dev/console >dev/console 2>&1
++exec /usr/bin/chroot . /sbin/init <dev/console >dev/console 2>&1
