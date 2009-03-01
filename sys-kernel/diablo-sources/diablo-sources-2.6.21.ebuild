@@ -1,6 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-kernel/vanilla-sources/vanilla-sources-2.6.27.ebuild,v 1.4 2009/01/15 13:47:09 mpagano Exp $
+# $Header$
 
 K_SECURITY_UNSUPPORTED=1
 K_NOSETEXTRAVERSION=1
@@ -18,7 +18,7 @@ HOMEPAGE="http://www.maemo.org"
 SRC_URI="${SRC_DIR}/${MY_P}.orig.tar.gz
 	${SRC_DIR}/${MY_PATCH}"
 
-KEYWORDS="-* ~arm"
+KEYWORDS="~arm"
 IUSE=""
 
 src_unpack() {
