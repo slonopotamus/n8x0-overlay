@@ -47,7 +47,7 @@ pkg_setup() {
 
 src_unpack() {
 	x-modular_unpack_source
-	epatch ${FILESDIR}/*.diff
+	epatch "${FILESDIR}/*.diff"
 }
 
 src_install() {
