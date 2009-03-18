@@ -1,0 +1,16 @@
+1. Provided by Michael Frey <michael.frey@canonical.com>
+   (Ubuntu LP #322325)
+2. Refreshed for latest changes
+
+--- xf86-input-tslib-0.0.5.orig/src/tslib.c
++++ xf86-input-tslib-0.0.5/src/tslib.c
+@@ -296,7 +296,9 @@
+ 
+ 		if (InitValuatorClassDeviceStruct(device,
+ 						  2,
++#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) < 3
+ 						  xf86GetMotionEvents,
++#endif
+ 						  0, Absolute) == FALSE) {
+ 			ErrorF("unable to allocate Valuator class device\n");
+ 			return !Success;

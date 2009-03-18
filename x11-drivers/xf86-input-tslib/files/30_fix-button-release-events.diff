@@ -1,0 +1,105 @@
+1. Provided by Mikko Rasa <tdb@tdb.fi>
+   http://bugs.debian.org/501139#10
+2. Refreshed for 10_use-hal-for-device.diff
+
+--- xf86-input-tslib-0.0.5.orig/src/tslib.c
++++ xf86-input-tslib-0.0.5/src/tslib.c
+@@ -123,52 +123,50 @@
+ 	int ret;
+ 	int x,y;
+ 
+-	ret = ts_read(priv->ts, &samp, 1);
++	while((ret = ts_read(priv->ts, &samp, 1)) == 1) {
++		if(samp.pressure) {
++			int tmp_x = samp.x;
++
++			switch(priv->rotate) {
++			case TSLIB_ROTATE_CW:	samp.x = samp.y;
++						samp.y = priv->width - tmp_x;
++						break;
++			case TSLIB_ROTATE_UD:	samp.x = priv->width - samp.x;
++						samp.y = priv->height - samp.y;
++						break;
++			case TSLIB_ROTATE_CCW:	samp.x = priv->height - samp.y;
++						samp.y = tmp_x;
++						break;
++			default:		break;
++			}
++
++			priv->lastx = samp.x;
++			priv->lasty = samp.y;
++			x = samp.x;
++			y = samp.y;
++
++			xf86XInputSetScreen(local, priv->screen_num,
++					samp.x,
++					samp.y);
+ 
+-	if (ret < 0) {
+-		ErrorF("ts_read failed\n");
+-		return;
+-	}
+-
+-//	ErrorF("%ld.%06ld: %6d %6d %6d\n", samp.tv.tv_sec, samp.tv.tv_usec, samp.x, samp.y, samp.pressure);
+-
+-	if(samp.pressure) {
+-		int tmp_x = samp.x;
++			xf86PostMotionEvent (local->dev, TRUE, 0, 2,
++					x, y);
+ 
+-		switch(priv->rotate) {
+-		case TSLIB_ROTATE_CW:	samp.x = samp.y;
+-					samp.y = priv->width - tmp_x;
+-					break;
+-		case TSLIB_ROTATE_UD:	samp.x = priv->width - samp.x;
+-					samp.y = priv->height - samp.y;
+-					break;
+-		case TSLIB_ROTATE_CCW:	samp.x = priv->height - samp.y;
+-					samp.y = tmp_x;
+-					break;
+-		default:		break;
+ 		}
+ 
+-		priv->lastx = samp.x;
+-		priv->lasty = samp.y;
+-		x = samp.x;
+-		y = samp.y;
+-
+-		xf86XInputSetScreen(local, priv->screen_num,
+-				samp.x,
+-				samp.y);
+-
+-		xf86PostMotionEvent (local->dev, TRUE, 0, 2,
+-				x, y);
++		if(!!priv->lastp != !!samp.pressure) {
++			priv->lastp = samp.pressure;
+ 
++			xf86PostButtonEvent(local->dev, TRUE,
++				1, !!samp.pressure, 0, 2,
++				priv->lastx,
++				priv->lasty);
++		}
+ 	}
+ 
+-	if(priv->lastp != samp.pressure) {
+-		priv->lastp = samp.pressure;
+-
+-		xf86PostButtonEvent(local->dev, TRUE,
+-			1, !!samp.pressure, 0, 2,
+-			priv->lastx,
+-			priv->lasty);
++	if (ret < 0) {
++		ErrorF("ts_read failed\n");
++		return;
+ 	}
+ 
+ }
+@@ -345,7 +343,7 @@
+   	if (!s)
+ 		s = xf86CheckStrOption(dev->commonOptions, "Device", NULL);
+  
+-	priv->ts = ts_open(s, 0);
++	priv->ts = ts_open(s, 1);
+ 	if (!priv->ts) {
+ 		ErrorF("ts_open failed (device=%s)\n",s);
+ 		return NULL;

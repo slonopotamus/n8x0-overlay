@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+  <email>miknix@gentoo.org</email>
+  <name>Angelo Miguel Arrifano</name>
+</maintainer>
+<maintainer>
+  <email>solar@gentoo.org</email>
+  <name>Ned Ludd</name>
+</maintainer>
+<herd>embedded</herd>
+<herd>x11-drivers</herd>
+</pkgmetadata>
