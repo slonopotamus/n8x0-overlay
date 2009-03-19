@@ -54,5 +54,5 @@ src_install() {
 	DOCS="COPYING ChangeLog"
 	x-modular_src_install
 	insinto /usr/share/hal/fdi/policy/20thirdparty/
-	doins ${FILESDIR}/10-x11-input-tslib.fdi
+	doins "${FILESDIR}/10-x11-input-tslib.fdi"
 }
