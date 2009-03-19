@@ -47,10 +47,12 @@ pkg_setup() {
 
 src_unpack() {
 	x-modular_unpack_source
-	epatch "${FILESDIR}/*.diff"
+	EPATCH_SOURCE="${FILESDIR}" EPATCH_SUFFIX="diff" EPATCH_FORCE="yes" epatch
 }
 
 src_install() {
 	DOCS="COPYING ChangeLog"
 	x-modular_src_install
+	insinto /usr/share/hal/fdi/policy/20thirdparty/
+	doins ${FILESDIR}/10-x11-input-tslib.fdi
 }
