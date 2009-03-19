@@ -6,9 +6,13 @@
 
 inherit toolchain-funcs eutils linux-info x-modular
 
+PATCHLEVEL=6
+PATCHFILE="${PN}_${PV}-${PATCHLEVEL}.diff"
+
 DESCRIPTION="xorg input driver for use of tslib based touchscreen devices"
-HOMEPAGE="http://www.pengutronix.de/software/xf86-input-tslib/index_en.html"
-SRC_URI="http://www.pengutronix.de/software/${PN}/download/${P}.tar.bz2"
+HOMEPAGE="http://www.pengutronix.de/software/${PN}/index_en.html"
+SRC_URI="http://www.pengutronix.de/software/${PN}/download/${P}.tar.bz2
+	ftp://cdn.debian.net/debian/pool/main/x/${PN}/${PATCHFILE}.gz"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~sh ~sparc ~x86"
 LICENSE="GPL-2"
 IUSE=""
@@ -47,12 +51,14 @@ pkg_setup() {
 
 src_unpack() {
 	x-modular_unpack_source
-	EPATCH_SOURCE="${FILESDIR}" EPATCH_SUFFIX="diff" EPATCH_FORCE="yes" epatch
+	cd "${WORKDIR}"
+	epatch "${WORKDIR}/${PATCHFILE}"
+	EPATCH_OPTS="-p0" EPATCH_SOURCE="${S}/debian/patches" EPATCH_SUFFIX="diff" EPATCH_FORCE="yes" epatch
 }
 
 src_install() {
 	DOCS="COPYING ChangeLog"
 	x-modular_src_install
 	insinto /usr/share/hal/fdi/policy/20thirdparty/
-	doins "${FILESDIR}/10-x11-input-tslib.fdi"
+	doins "${S}/debian/10-x11-input-tslib.fdi"
 }
