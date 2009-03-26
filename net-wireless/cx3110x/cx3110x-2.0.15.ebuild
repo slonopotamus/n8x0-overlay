@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~arm"
 DEPEND="virtual/linux-sources"
 RDEPEND=""
-S="${WORKDIR}/${MY_PN}-${PV}"
+S="${WORKDIR}/${MY_PN}"
 MODULE_NAMES="${PN}(kernel/drivers/net/wireless:${S}:${S}/src) ${PN}_mt(kernel/drivers/net/wireless:${S}:${S}/src)"
 BUILD_TARGETS="clean modules"
 BUILD_PARAMS="KERNEL_SRC_DIR=${KERNEL_DIR}"
@@ -22,5 +22,4 @@ BUILD_PARAMS="KERNEL_SRC_DIR=${KERNEL_DIR}"
 src_unpack() {
 	unpack ${A}
 	epatch "${FILESDIR}/no-config.h-fix.patch"
-	epatch "${FILESDIR}/deblet-cx3110x.patch"
 }
