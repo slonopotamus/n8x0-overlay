@@ -27,6 +27,7 @@ src_unpack() {
 	mv "${MY_PN}" "${dir}" || die
 	epatch "${DISTDIR}/${MY_PATCH}"
 	epatch "${FILESDIR}/no-crosscompile.patch"
+	epatch "${FILESDIR}/missing-limits-h.patch"
 	rm -rf "${dir}/debian"
 	mv "${dir}/kernel-source" "${S}"
 

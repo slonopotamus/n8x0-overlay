@@ -1,0 +1,11 @@
+diff -ur kernel-source-diablo.orig/kernel-source/scripts/mod/sumversion.c kernel-source-diablo-2.6.21/kernel-source/scripts/mod/sumversion.c
+--- kernel-source-diablo.orig/kernel-source/scripts/mod/sumversion.c	2009-03-25 20:04:27.000000000 +0300
++++ kernel-source-diablo-2.6.21/kernel-source/scripts/mod/sumversion.c	2009-03-25 20:13:37.000000000 +0300
+@@ -7,6 +7,7 @@
+ #include <ctype.h>
+ #include <errno.h>
+ #include <string.h>
++#include <limits.h>
+ #include "modpost.h"
+ 
+ /*
