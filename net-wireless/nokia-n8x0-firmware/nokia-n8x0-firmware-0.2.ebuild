@@ -5,26 +5,16 @@
 inherit eutils
 
 SRC_URI="http://repository.mer.tspre.org/pool/main/n/${PN}/${PN}_${PV}.tar.gz"
+DESCRIPTION="Way to bring Nokia N8x0 wifi & bluetooth chip firmware"
 KEYWORDS="~arm"
 SLOT="0"
-IUSE=""
-LICENSE="MIT"
+LICENSE="BSD"
 HOMEPAGE="http://wiki.maemo.org/Mer"
+IUSE=""
 
 S="${WORKDIR}/${PN}"
 
-src_unpack() {
-	unpack ${A}
-	epatch "${FILESDIR}/gentoofy.patch"
-}
-
 src_install() {
-	insinto /etc
-	doins pointercal-*
-	newinitd debian/${PN}.init ${PN}
-}
-
-pkg_postinst() {
-	einfo "Please add '${PN}' init script to boot services"
-	einfo "by running: rc-update add ${PN} default"
+	dodir /lib/firmware/
+	while read line; do ln -s ${line/ \// ${D}\/}; done < <(cat debian/links) || die
 }

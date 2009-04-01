@@ -5,7 +5,6 @@
 inherit eutils
 
 SRC_URI="http://repository.mer.tspre.org/pool/main/n/${PN}/${PN}_1.6mer5.tar.gz"
-DESCRIPTION="TODO"
 KEYWORDS="~arm"
 SLOT="0"
 LICENSE="BSD"

@@ -1,0 +1,9 @@
+#!/sbin/runscript
+
+start() {
+	rmmod cx3110x
+	modprobe cx3110x
+	einfo Calibrating wlan0..
+	mount --bind /sys /mnt/initfs/sys
+	chroot /mnt/initfs /usr/bin/wlan-cal
+}
