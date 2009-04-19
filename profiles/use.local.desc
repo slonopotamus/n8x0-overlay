@@ -1,0 +1,1 @@
+sys-apps/kbd:512keys -- Enables support for up to 512 keys (default is only 256)

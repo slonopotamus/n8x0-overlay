@@ -11,7 +11,7 @@ SRC_URI="ftp://ftp.altlinux.org/pub/people/legion/kbd/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc x86"
-IUSE="nls"
+IUSE="512keys nls"
 
 RDEPEND=""
 DEPEND="${RDEPEND}
@@ -51,6 +51,7 @@ src_unpack() {
 	epatch "${FILESDIR}"/${PN}-1.12-xcompile.patch
 	
 	# support for up to 512 keycodes
+	use 512keys &&
 	epatch "${FILESDIR}"/${P}-512keys.patch
 }
 
