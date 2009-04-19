@@ -49,6 +49,9 @@ src_unpack() {
 
 	# cross-compile fails for powerpc targets bug #133856
 	epatch "${FILESDIR}"/${PN}-1.12-xcompile.patch
+	
+	# support for up to 512 keycodes
+	epatch "${FILESDIR}"/${P}-512keys.patch
 }
 
 src_compile() {

@@ -1,0 +1,26 @@
+diff -ur orig/kbd-1.13/src/dumpkeys.c patched/kbd-1.13/src/dumpkeys.c
+--- orig/kbd-1.13/src/dumpkeys.c	2007-05-10 15:25:19.000000000 -0500
++++ patched/kbd-1.13/src/dumpkeys.c	2009-04-19 14:34:27.000000000 -0500
+@@ -47,7 +47,9 @@
+ 
+ static void
+ find_nr_keys(void) {
+-	nr_keys = (has_key(255) ? 256 : has_key(127) ? 128 : 112);
++	nr_keys = (has_key(511) ? 512 :
++	           has_key(255) ? 256 :
++	           has_key(127) ? 128 : 112);
+ }
+ 
+ static void
+diff -ur orig/kbd-1.13/src/loadkeys.y patched/kbd-1.13/src/loadkeys.y
+--- orig/kbd-1.13/src/loadkeys.y	2007-05-10 15:25:19.000000000 -0500
++++ patched/kbd-1.13/src/loadkeys.y	2009-04-19 14:33:33.000000000 -0500
+@@ -33,7 +33,7 @@
+ #endif
+ 
+ #undef NR_KEYS
+-#define NR_KEYS 256
++#define NR_KEYS 512
+ 
+ /* What keymaps are we defining? */
+ char defining[MAX_NR_KEYMAPS];

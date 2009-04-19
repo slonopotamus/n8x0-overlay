@@ -22,6 +22,9 @@ src_unpack() {
 	cd "${S}"
 
 	epatch "${FILESDIR}"/${PN}-1.12-kbio.patch
+	
+	# support for up to 512 keycodes
+	epatch "${FILESDIR}"/${PN}-1.13-512keys.patch
 }
 
 src_compile() {
