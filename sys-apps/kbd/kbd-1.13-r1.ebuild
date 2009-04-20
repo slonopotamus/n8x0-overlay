@@ -1,7 +1,8 @@
-EAPI=2
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-apps/kbd/kbd-1.13-r1.ebuild,v 1.9 2007/12/11 10:16:11 vapier Exp $
+# $Header$
+
+EAPI=2
 
 inherit eutils toolchain-funcs
 
@@ -50,10 +51,9 @@ src_unpack() {
 
 	# cross-compile fails for powerpc targets bug #133856
 	epatch "${FILESDIR}"/${PN}-1.12-xcompile.patch
-	
+
 	# support for up to 512 keycodes
-	use 512keys &&
-	epatch "${FILESDIR}"/${P}-512keys.patch
+	use 512keys && epatch "${FILESDIR}/${P}-512keys.patch"
 }
 
 src_configure() {
