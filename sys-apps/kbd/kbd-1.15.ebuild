@@ -29,9 +29,8 @@ src_unpack() {
 	epatch "${FILESDIR}"/${PN}-1.13-512keys.patch
 }
 
-src_compile() {
+src_configure() {
 	econf $(use_enable nls) || die
-	emake || die
 }
 
 src_install() {

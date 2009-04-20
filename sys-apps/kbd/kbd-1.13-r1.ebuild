@@ -56,7 +56,7 @@ src_unpack() {
 	epatch "${FILESDIR}"/${P}-512keys.patch
 }
 
-src_compile() {
+src_configure() {
 	local myconf=
 	# Non-standard configure script; --disable-nls to
 	# disable NLS, nothing to enable it.
@@ -66,7 +66,9 @@ src_compile() {
 		--mandir=/usr/share/man \
 		--datadir=/usr/share \
 		${myconf} || die
+}
 
+src_compile() {
 	emake CC="$(tc-getCC)" || die "emake failed"
 }
 
