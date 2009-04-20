@@ -1,4 +1,0 @@
-# Luke Dashjr <luke_n8x0_overlay@dashjr.org>
-# Mask sys-apps/kbd without 512keys USE flag
-# N8x0 requires this for Fn key
-sys-apps/kbd[-512keys]
