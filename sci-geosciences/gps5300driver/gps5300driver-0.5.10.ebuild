@@ -5,7 +5,7 @@ MyPN="${PN/5300/}"
 
 SRC_URI="http://timeless.justdave.net/repository/catalogue.tableteer.nokia.com/updates/diablo/${MyPN}_${PV}_armel.deb"
 SLOT="0"
-KEYWORDS="~arm"
+KEYWORDS="-* ~arm"
 IUSE=""
 
 DEPEND=''
