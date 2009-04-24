@@ -2,7 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
-IUSE="bluetooth wifi X"
+EAPI=2
+
+IUSE="bluetooth wifi X keyboard"
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
@@ -19,8 +21,11 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		net-wireless/wireless-tools
 		net-wireless/wpa_supplicant
 	)
+	keyboard? ( sys-apps/kbd[512keys] )
 	X? (
 		x11-misc/nokia-tablets-pointercal
-		x11-drivers/xf86-input-tslib
+		x11-base/xorg-server[tslib,xorg,input_devices_tslib,input_devices_evdev]
 		x11-drivers/xf86-video-omapfb
+
+		keyboard? ( x11-base/xorg-server[input_devices_keyboard] )
 	)"
