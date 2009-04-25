@@ -31,6 +31,7 @@ src_unpack() {
 
 src_compile() {
 	local preloadsrc="${FILESDIR}/preload.c"
+	preloadsrc="${FILESDIR}/preload_init.c"
 	if ! use gconf; then
 		while read offs sz; do
 			dd if=/dev/zero bs=1 count="$sz" seek="$offs" of="./usr/sbin/${MyPN}"
