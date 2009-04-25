@@ -33,7 +33,7 @@ bind(int sockfd, const struct sockaddr*addr, socklen_t addrlen) {
 		int sck;
 		char initcmd[] = "P 3\n";
 		
-		sck = socket(PF_UNIX, SOCK_DGRAM, 0);
+		sck = socket(PF_FILE, SOCK_STREAM, 0);
 		if (sck < 0)
 			exit(1);
 		if (connect(sck, addr, addrlen))
