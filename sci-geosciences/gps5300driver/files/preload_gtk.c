@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 typedef enum {
 	GCONF_VALUE_NONE,
 	GCONF_VALUE_STRING,
