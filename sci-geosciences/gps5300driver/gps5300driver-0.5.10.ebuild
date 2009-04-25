@@ -38,7 +38,7 @@ src_compile() {
 		done < "${FILESDIR}/${P}.zeroblks"
 		preloadsrc="${preloadsrc} ${FILESDIR}/preload_gtk.c"
 	fi
-	cc ${CFLAGS} -fPIC -ldl $preloadsrc -o libgps5300faker.so ||
+	cc ${CFLAGS} -shared -fPIC -ldl $preloadsrc -o libgps5300faker.so ||
 		die "Failed to compile gps5300faker"
 }
 
