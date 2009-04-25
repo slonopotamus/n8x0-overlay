@@ -1,6 +1,10 @@
+#include <dlfcn.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <unistd.h>
 
 typedef int (*bind_t)(int, const struct sockaddr*, socklen_t);
 
