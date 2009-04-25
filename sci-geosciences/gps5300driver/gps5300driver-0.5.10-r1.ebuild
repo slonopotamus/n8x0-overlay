@@ -47,6 +47,7 @@ src_install() {
 	dolib.so "libgps5300faker.so"
 	dodoc ./usr/share/doc/${MyPN}/copyright
 	dodoc ./usr/share/doc/${MyPN}/changelog.gz
+	keepdir /var/lib/gps
 	
 	# Gentoo-oriented init script
 	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
