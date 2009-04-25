@@ -26,6 +26,4 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		x11-misc/nokia-tablets-pointercal
 		x11-base/xorg-server[tslib,xorg,input_devices_tslib,input_devices_evdev]
 		x11-drivers/xf86-video-omapfb
-
-		keyboard? ( x11-base/xorg-server[input_devices_keyboard] )
 	)"
