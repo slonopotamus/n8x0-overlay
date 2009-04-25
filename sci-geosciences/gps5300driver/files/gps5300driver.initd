@@ -2,6 +2,7 @@
 
 GPS5300_DRIVER='/usr/sbin/gps5300driver'
 GPS5300_PIDFILE='/var/run/gps5300driver.pid'
+GPS5300_PRELOAD='/usr/lib/libgps5300faker.so'
 
 start() {
 	ebegin "Starting GPS5300 driver"
@@ -14,6 +15,7 @@ start() {
 		--background \
 		--pidfile "${GPS5300_PIDFILE}" \
 		--make-pidfile \
+		--env "LD_PRELOAD=${GPS5300_PRELOAD}" \
 		--exec "${GPS5300_DRIVER}"
 	eend $?
 }
