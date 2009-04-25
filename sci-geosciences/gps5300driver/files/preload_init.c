@@ -8,6 +8,12 @@
 #include <sys/un.h>
 #include <unistd.h>
 
+static struct sockaddr_un ctrl_sau = {
+	AF_UNIX,
+	"/var/lib/gps/gps_driver_ctrl\0",
+};
+#define CTRL_SCK_PATH ctrl_sau.sun_path
+
 static int ctrl_sck = -1;
 
 typedef int (*bind_t)(int, const struct sockaddr*, socklen_t);
@@ -23,7 +29,7 @@ bind(int sockfd, const struct sockaddr*addr, socklen_t addrlen) {
 	if (
 	    addr &&
 	    addr->sa_family == AF_FILE &&
-	    !strcmp("/var/lib/gps/gps_driver_ctrl",
+	    !strcmp(CTRL_SCK_PATH,
 	            ((struct sockaddr_un*)addr)->sun_path
 	           ) &&
 	    getenv("GPS5300_SELFINIT") &&
@@ -54,7 +60,7 @@ listen(int sockfd, int backlog) {
 		sck = socket(PF_FILE, SOCK_STREAM, 0);
 		if (sck < 0)
 			exit(1);
-		if (connect(sck, addr, addrlen))
+		if (connect(sck, &ctrl_sau, sizeof ctrl_sau))
 			exit(1);
 		write(sck, initcmd, sizeof initcmd);
 		close(sck);
