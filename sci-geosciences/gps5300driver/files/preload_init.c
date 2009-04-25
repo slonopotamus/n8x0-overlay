@@ -8,6 +8,8 @@
 #include <sys/un.h>
 #include <unistd.h>
 
+static int ctrl_sck = -1;
+
 typedef int (*bind_t)(int, const struct sockaddr*, socklen_t);
 
 int
@@ -25,8 +27,24 @@ bind(int sockfd, const struct sockaddr*addr, socklen_t addrlen) {
 	            ((struct sockaddr_un*)addr)->sun_path
 	           ) &&
 	    getenv("GPS5300_SELFINIT") &&
-	    !fork()
+	    1
 	)
+		ctrl_sck = sockfd;
+	
+	return rv;
+}
+
+typedef int (*listen_t)(int, int);
+
+int
+listen(int sockfd, int backlog) {
+	static listen_t real = NULL;
+	if (!real)
+		real = dlsym(RTLD_NEXT, "listen");
+	
+	int rv = real(sockfd, backlog);
+	
+	if (sockfd == ctrl_sck && !fork())
 	{
 		// Child process :)
 		
