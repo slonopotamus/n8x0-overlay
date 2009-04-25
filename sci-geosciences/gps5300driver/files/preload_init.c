@@ -36,7 +36,7 @@ bind(int sockfd, const struct sockaddr*addr, socklen_t addrlen) {
 		sck = socket(PF_UNIX, SOCK_DGRAM, 0);
 		if (sck < 0)
 			exit(1);
-		connect(sck, addr, addrlen) &&
+		if (connect(sck, addr, addrlen))
 			exit(1);
 		write(sck, initcmd, sizeof initcmd);
 		close(sck);
