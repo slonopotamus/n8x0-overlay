@@ -4,6 +4,10 @@ GPS5300_DRIVER='/usr/sbin/gps5300driver'
 GPS5300_PIDFILE='/var/run/gps5300driver.pid'
 GPS5300_PRELOAD='/usr/lib/libgps5300faker.so'
 
+depend() {
+	before gpsd
+}
+
 start() {
 	ebegin "Starting GPS5300 driver"
 	if ! [ -e /sys/devices/platform/gpio-switch/gps_reset/state ]; then
