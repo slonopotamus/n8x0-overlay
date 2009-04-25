@@ -10,15 +10,13 @@ start() {
 		eend 1 'gps_reset state gpio switch missing'
 		return
 	fi
-	local ssd_extra=
 	
 	[ -z "${GPS5300_SELFINIT}" ] && GPS5300_SELFINIT=true
-	if ${GPS5300_SELFINIT}; then
-		ssd_extra="${ssd_extra} --env GPS5300_SELFINIT=1"
-	fi
-	unset GPS5300_SELFINIT
+	${GPS5300_SELFINIT} || unset GPS5300_SELFINIT
+	export GPS5300_SELFINIT
 	
 	[ -z "${GPS5300_USER}" ] && GPS5300_USER=root
+	export GPS5300_USER
 	
 	start-stop-daemon --start \
 		--quiet \
@@ -26,8 +24,6 @@ start() {
 		--pidfile "${GPS5300_PIDFILE}" \
 		--make-pidfile \
 		--env "LD_PRELOAD=${GPS5300_PRELOAD}" \
-		--env "GPS5300_USER=${GPS5300_USER}" \
-		${ssd_extra} \
 		--exec "${GPS5300_DRIVER}"
 	eend $?
 }
