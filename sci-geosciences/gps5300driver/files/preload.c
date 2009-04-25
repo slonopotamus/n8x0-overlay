@@ -16,7 +16,7 @@ getpwnam(const char *name) {
 	
 	if (!strcmp(name, "user"))
 	{
-		const char*username = getenv("GPS5300DRIVER_USER");
+		const char*username = getenv("GPS5300_USER");
 		if (username)
 			name = username;
 	}

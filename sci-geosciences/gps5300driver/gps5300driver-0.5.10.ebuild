@@ -49,4 +49,5 @@ src_install() {
 	
 	# Gentoo-oriented init script
 	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
+	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
 }

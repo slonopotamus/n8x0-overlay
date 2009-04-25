@@ -18,12 +18,15 @@ start() {
 	fi
 	unset GPS5300_SELFINIT
 	
+	[ -z "${GPS5300_USER}" ] && GPS5300_USER=root
+	
 	start-stop-daemon --start \
 		--quiet \
 		--background \
 		--pidfile "${GPS5300_PIDFILE}" \
 		--make-pidfile \
 		--env "LD_PRELOAD=${GPS5300_PRELOAD}" \
+		--env "GPS5300_USER=${GPS5300_USER}" \
 		${ssd_extra} \
 		--exec "${GPS5300_DRIVER}"
 	eend $?

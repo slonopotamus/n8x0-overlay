@@ -1,0 +1,7 @@
+# /etc/conf.d/gps5300driver
+
+# The user who can control the driver
+GPS5300_USER=root
+
+# Whether the driver will self-initialize
+GPS5300_SELFINIT=true
