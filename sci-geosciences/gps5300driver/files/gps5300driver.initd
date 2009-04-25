@@ -1,0 +1,27 @@
+#!/sbin/runscript
+
+GPS5300_DRIVER='/usr/sbin/gps5300driver'
+GPS5300_PIDFILE='/var/run/gps5300driver.pid'
+
+start() {
+	ebegin "Starting GPS5300 driver"
+	if ! [ -e /sys/devices/platform/gpio-switch/gps_reset/state ]; then
+		eend 1 'gps_reset state gpio switch missing'
+		return
+	fi
+	start-stop-daemon --start \
+		--quiet \
+		--background \
+		--pidfile "${GPS5300_PIDFILE}" \
+		--make-pidfile \
+		--exec "${GPS5300_DRIVER}"
+	eend $?
+}
+
+stop() {
+	echo "Stopping GPS5300 driver"
+	start-stop-daemon --stop \
+		--quiet \
+		--pidfile "${GPS5300_PIDFILE}"
+	eend $?
+}

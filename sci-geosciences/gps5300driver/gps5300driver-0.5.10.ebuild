@@ -28,10 +28,10 @@ src_unpack() {
 }
 
 src_install() {
-	dosbin ./usr/sbin/${MyPN}
+	newsbin "./usr/sbin/${MyPN}" "${PN}"
 	dodoc ./usr/share/doc/${MyPN}/copyright
 	dodoc ./usr/share/doc/${MyPN}/changelog.gz
 	
 	# Gentoo-oriented init script
-	# TODO
+	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
 }
