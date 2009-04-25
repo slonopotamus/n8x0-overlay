@@ -33,7 +33,7 @@ start() {
 }
 
 stop() {
-	echo "Stopping GPS5300 driver"
+	ebegin "Stopping GPS5300 driver"
 	start-stop-daemon --stop \
 		--quiet \
 		--pidfile "${GPS5300_PIDFILE}"
