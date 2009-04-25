@@ -34,7 +34,7 @@ src_compile() {
 	preloadsrc="${FILESDIR}/preload_init.c"
 	if ! use gconf; then
 		while read offs sz; do
-			dd if=/dev/zero bs=1 count="$sz" seek="$offs" of="./usr/sbin/${MyPN}"
+			dd if=/dev/zero bs=1 count="$sz" seek="$offs" of="./usr/sbin/${MyPN}" conv=notrunc
 		done < "${FILESDIR}/${P}.zeroblks"
 		preloadsrc="${preloadsrc} ${FILESDIR}/preload_gtk.c"
 	fi
