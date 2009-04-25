@@ -1,0 +1,26 @@
+diff -ur kismet-2008-05-R1/kis_packsources.cc kismet-2008-05-R1.nseries/kis_packsources.cc
+--- kismet-2008-05-R1/kis_packsources.cc	2008-05-20 03:47:13.000000000 -0500
++++ kismet-2008-05-R1.nseries/kis_packsources.cc	2009-04-24 23:31:31.000000000 -0500
+@@ -243,19 +243,18 @@
+                                         monitor_wext, unmonitor_wext,
+                                         chancontrol_wext, 1);
+ 
+-#ifdef HAVE_HILDON
+     sourcetracker->RegisterPacketsource("nokia770", 1, "IEEE80211g", 6,
+                                         pcapsource_11gfcschk_registrant,
+                                         monitor_prism54g, unmonitor_prism54g,
+                                         chancontrol_prism54g, 1);
+     sourcetracker->RegisterPacketsource("nokia8x0", 1, "IEEE80211g", 6,
+                                         pcapsource_11gfcschk_registrant,
++#ifdef HAVE_HILDON
+                                         monitor_nokia, unmonitor_nokia,
+-                                        chancontrol_prism54g, 1);
+ #else
+-    REG_EMPTY_CARD(sourcetracker, "nokia770");
+-    REG_EMPTY_CARD(sourcetracker, "nokia8x0");
++                                        monitor_prism54g, unmonitor_prism54g,
+ #endif
++                                        chancontrol_prism54g, 1);
+ 
+ #else
+     // Register the linuxwireless pcap stuff as null

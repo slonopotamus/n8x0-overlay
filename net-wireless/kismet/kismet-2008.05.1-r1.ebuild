@@ -1,6 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-wireless/kismet/kismet-2008.05.1.ebuild,v 1.4 2009/04/15 13:43:25 hanno Exp $
+# $Header: $
 
 inherit toolchain-funcs linux-info eutils
 
@@ -35,6 +35,7 @@ src_unpack() {
 		-e 's|@mangrp@|root|g' Makefile.in
 
 	epatch "${FILESDIR}"/gcc-4.3.patch
+	epatch "${FILESDIR}/${PN}-nokia770-without-libhildon.patch"
 }
 
 src_compile() {
