@@ -1,2 +1,0 @@
-sci-geosciences/gps5300driver:gconf -- Enables support for storing/loading GPS and A-GPS information via gconf
-sys-apps/kbd:512keys -- Enables support for up to 512 keys (default is only 256)
