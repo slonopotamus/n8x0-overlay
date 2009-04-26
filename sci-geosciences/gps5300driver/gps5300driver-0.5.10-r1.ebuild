@@ -3,10 +3,11 @@ HOMEPAGE="http://nokia.com"
 LICENSE="CopyrightNokia"
 MyPN="${PN/5300/}"
 
-SRC_URI="http://timeless.justdave.net/repository/catalogue.tableteer.nokia.com/updates/diablo/${MyPN}_${PV}_armel.deb"
+SRC_URI="mirror://n8x0/updates/diablo/${MyPN}_${PV}_armel.deb"
 SLOT="0"
 KEYWORDS="-* ~arm"
 IUSE="gconf"
+RESTRICT="mirror"
 
 DEPEND=''
 RDEPEND="${DEPEND}"'
