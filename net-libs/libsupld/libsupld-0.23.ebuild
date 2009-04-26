@@ -2,7 +2,7 @@ DESCRIPTION="Library for interfacing supl-daemon."
 HOMEPAGE="http://nokia.com"
 LICENSE="BSD NoSourceAvailable"
 
-SRC_URI="http://timeless.justdave.net/repository/catalogue.tableteer.nokia.com/updates/diablo/${PN}1_${PV}_armel.deb"
+SRC_URI="mirror://n8x0/updates/diablo/${PN}1_${PV}_armel.deb"
 SLOT="1"
 KEYWORDS="-* ~arm"
 IUSE=""
