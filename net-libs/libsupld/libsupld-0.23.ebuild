@@ -13,6 +13,9 @@ RDEPEND="${DEPEND}"'
 	>=sys-devel/gcc-3.4.4
 '
 
+RESTRICT="installsources"
+QA_PRESTRIPPED="./usr/lib/${PN}.so"
+
 S="${WORKDIR}"
 
 src_unpack() {

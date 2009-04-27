@@ -9,7 +9,8 @@ SRC_URI="mirror://n8x0/updates/diablo/${MyPN}_${PV}_armel.deb"
 SLOT="0"
 KEYWORDS="-* ~arm"
 IUSE="gconf"
-RESTRICT="mirror"
+RESTRICT="mirror installsources bindist"
+QA_PRESTRIPPED="./usr/sbin/${PN}"
 
 DEPEND=''
 RDEPEND="${DEPEND}"'
