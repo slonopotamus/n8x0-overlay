@@ -1,3 +1,4 @@
+# Copyright 2009 Luke Dashjr <luke_n8x0_gps5300driver@dashjr.org>
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
