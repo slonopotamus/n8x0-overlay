@@ -1,3 +1,7 @@
+# Copyright 1999-2009 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header$
+
 DESCRIPTION="Library for interfacing supl-daemon."
 HOMEPAGE="http://nokia.com"
 LICENSE="BSD NoSourceAvailable"
@@ -17,7 +21,7 @@ S="${WORKDIR}"
 
 src_unpack() {
 	unpack ${A}
-	unpack ./data.tar.gz 
+	unpack ./data.tar.gz
 	rm -f control.tar.gz data.tar.gz debian-binary
 }
 
