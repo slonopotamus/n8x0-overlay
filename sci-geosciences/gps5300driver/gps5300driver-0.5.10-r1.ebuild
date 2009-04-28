@@ -1,4 +1,4 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 2009 Luke Dashjr <luke_n8x0_gps5300driver@dashjr.org>
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
@@ -13,7 +13,8 @@ SRC_URI="mirror://n8x0/updates/diablo/${MyPN}_${PV}_armel.deb"
 SLOT="0"
 KEYWORDS="-* ~arm"
 IUSE="gconf"
-RESTRICT="mirror"
+RESTRICT="mirror installsources bindist"
+QA_PRESTRIPPED="./usr/sbin/${PN}"
 
 DEPEND=''
 RDEPEND="${DEPEND}"'

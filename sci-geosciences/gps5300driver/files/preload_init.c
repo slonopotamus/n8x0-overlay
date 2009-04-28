@@ -1,3 +1,9 @@
+/*
+ * Copyright 2009 Luke Dashjr <luke_n8x0_gps5300driver@dashjr.org>
+ * Licensed for redistribution as-is;
+ * contact me if you want something more permissive
+ */
+
 #define _GNU_SOURCE
 
 #include <dlfcn.h>
