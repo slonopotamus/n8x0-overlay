@@ -1,5 +1,9 @@
 #!/sbin/runscript
 
+depend() {
+	before net
+}
+
 start() {
 	rmmod cx3110x
 	modprobe cx3110x
