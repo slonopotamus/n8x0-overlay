@@ -16,11 +16,13 @@ S="${WORKDIR}/${PN}"
 src_unpack() {
 	unpack ${A}
 	epatch "${FILESDIR}/gentoofy.patch"
+	epatch "${FILESDIR}/nokia_tmp.patch"
 }
 
 src_install() {
 	doins linuxrc
 	dodir /mnt/initfs
+	dodir /var/run/nokia/
 	doinitd etc/init.d/nit-boot-basics
 }
 
