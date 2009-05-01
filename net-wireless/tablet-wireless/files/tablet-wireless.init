@@ -5,9 +5,9 @@ depend() {
 }
 
 start() {
-	rmmod cx3110x
+	einfo "Loading cx3110x module"
+	insmod /mnt/initfs/lib/modules/`uname -r`/umac.ko
 	modprobe cx3110x
-	einfo Calibrating wlan0..
-	mount --bind /sys /mnt/initfs/sys
+	einfo "Calibrating wlan.."
 	chroot /mnt/initfs /usr/bin/wlan-cal
 }
