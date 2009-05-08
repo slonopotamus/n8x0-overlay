@@ -1,0 +1,1 @@
+stlc4560-firmware-2.13.12.0.9910.5.2.ebuild
