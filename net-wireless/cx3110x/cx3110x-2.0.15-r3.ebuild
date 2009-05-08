@@ -27,11 +27,11 @@ S="${WORKDIR}/${MY_PN}/src"
 BUILD_TARGETS="clean modules"
 BUILD_PARAMS="KERNEL_SRC_DIR=${KERNEL_DIR}"
 if use debug; then
-	MODULE_NAMES="${PN}_mt(kernel/drivers/net/wireless:${S}:${S}/src)"
-	BUILD_PARAMS="${BUILD_PARAMS} CONFIG_CX3110X_STA=m"
-else
-	MODULE_NAMES="${PN}(kernel/drivers/net/wireless:${S}:${S}/src)"
+	MODULE_NAMES="${PN}_mt(kernel/drivers/net/wireless)"
 	BUILD_PARAMS="${BUILD_PARAMS} CONFIG_CX3110X_PROD=m"
+else
+	MODULE_NAMES="${PN}(kernel/drivers/net/wireless)"
+	BUILD_PARAMS="${BUILD_PARAMS} CONFIG_CX3110X_STA=m"
 fi
 
 src_unpack() {
