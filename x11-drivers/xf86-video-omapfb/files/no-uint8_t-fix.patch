@@ -1,0 +1,24 @@
+diff -ur xserver-xorg-video-omapfb.orig/src/image-format-conversions.h xserver-xorg-video-omapfb/src/image-format-conversions.h
+--- xserver-xorg-video-omapfb.orig/src/image-format-conversions.h	2009-01-23 23:07:03.000000000 +0300
++++ xserver-xorg-video-omapfb/src/image-format-conversions.h	2009-02-05 23:28:25.000000000 +0300
+@@ -24,6 +24,8 @@
+ #ifndef __IMAGE_FORMAT_CONVERSIONS_H__
+ #define __IMAGE_FORMAT_CONVERSIONS_H__
+ 
++#include <stdint.h>
++
+ /* Basic line-based copy for packed formats */
+ void packed_line_copy(int w, int h, int stride, uint8_t *src, uint8_t *dest);
+ 
+diff -ur xserver-xorg-video-omapfb.orig/src/omapfb-xv-blizzard.c xserver-xorg-video-omapfb/src/omapfb-xv-blizzard.c
+--- xserver-xorg-video-omapfb.orig/src/omapfb-xv-blizzard.c	2009-01-23 23:07:03.000000000 +0300
++++ xserver-xorg-video-omapfb/src/omapfb-xv-blizzard.c	2009-02-05 23:28:47.000000000 +0300
+@@ -30,6 +30,8 @@
+  *  -
+  */
+ 
++#include <stdint.h>
++
+ #include "xf86.h"
+ #include "xf86_OSlib.h"
+ #include "xf86xv.h"
