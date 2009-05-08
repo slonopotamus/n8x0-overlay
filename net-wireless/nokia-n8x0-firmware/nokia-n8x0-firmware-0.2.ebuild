@@ -12,6 +12,17 @@ LICENSE="as-is"
 HOMEPAGE=""
 IUSE="bluetooth +n800 +n810 wifi wimax"
 
+RDEPEND="
+	wifi? (
+		n810? (
+			!net-wireless/stlc4560-firmware
+		)
+		!n800? (
+			!net-wireless/stlc4560-firmware
+		)
+	)
+"
+
 src_install() {
 	local ffl= ff
 	if use bluetooth; then
