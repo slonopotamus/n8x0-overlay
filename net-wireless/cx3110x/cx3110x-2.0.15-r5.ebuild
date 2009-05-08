@@ -18,8 +18,12 @@ DEPEND="virtual/linux-sources"
 RDEPEND="
 	|| (
 		net-wireless/nokia-n8x0-firmware[wifi]
+		net-wireless/stlc4550-firmware
 		net-wireless/stlc4560-firmware
 	)
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.13.14
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.22.0
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.23
 	!=net-wireless/stlc4560-firmware-2.13.12.0.9910.5.2
 "
 
