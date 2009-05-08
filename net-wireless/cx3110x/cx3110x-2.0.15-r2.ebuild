@@ -15,7 +15,12 @@ SLOT="0"
 KEYWORDS="~arm"
 
 DEPEND="virtual/linux-sources"
-RDEPEND="net-wireless/nokia-n8x0-firmware"
+RDEPEND="
+	|| (
+		net-wireless/nokia-n8x0-firmware[wifi]
+		net-wireless/stlc4560-firmware
+	)
+"
 
 S="${WORKDIR}/${MY_PN}"
 
@@ -31,7 +36,7 @@ src_unpack() {
 src_install() {
 	linux-mod_src_install
 	
-	execinto "/$(get_libdir)/udev"
+	exeinto "/$(get_libdir)/udev"
 	doexe "${FILESDIR}/${PN}-cal" ||
 		die "${PN}-cal script not installed properly"
 	insinto "/etc/udev/rules.d"
