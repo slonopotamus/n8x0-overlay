@@ -20,6 +20,7 @@ RDEPEND="
 		net-wireless/nokia-n8x0-firmware[wifi]
 		net-wireless/stlc4560-firmware
 	)
+	!=net-wireless/stlc4560-firmware-2.13.12.0.9910.5.2
 "
 
 S="${WORKDIR}/${MY_PN}/src"
