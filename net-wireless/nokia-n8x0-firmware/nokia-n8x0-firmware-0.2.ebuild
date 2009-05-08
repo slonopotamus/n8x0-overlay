@@ -10,7 +10,7 @@ KEYWORDS="~arm"
 SLOT="0"
 LICENSE="as-is"
 HOMEPAGE=""
-IUSE="bluetooth +n800 +n810 wifi wimax"
+IUSE="bluetooth n800 n810 wifi wimax"
 
 RDEPEND="
 	wifi? (
