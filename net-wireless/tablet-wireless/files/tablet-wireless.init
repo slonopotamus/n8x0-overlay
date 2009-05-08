@@ -6,8 +6,7 @@ depend() {
 
 start() {
 	ebegin "Loading cx3110x module"
-	insmod /mnt/initfs/lib/modules/`uname -r`/umac.ko
-	modprobe cx3110x
+	modprobe cx3110x || modprobe cx3110x_mt
 	eend $?
 	ebegin "Calibrating wlan.."
 	chroot /mnt/initfs /usr/bin/wlan-cal
@@ -16,6 +15,6 @@ start() {
 
 stop() {
 	ebegin "Unloading cx3110x module"
-	rmmod cx3110x
+	rmmod cx3110x || rmmod cx3110x_mt
 	eend $?
 }
