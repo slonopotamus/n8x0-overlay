@@ -5,8 +5,8 @@
 inherit linux-mod
 
 IUSE=""
-MY_PN="cx3110x-module-src"
-DESCRIPTION="cx3110x wifi driver"
+MY_PN="${PN}-module-src"
+DESCRIPTION="${PN} wifi driver"
 SRC_URI="http://repository.mer.tspre.org/pool/main/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz"
 LICENSE="GPL-2"
 HOMEPAGE="http://www.maemo.org"
@@ -26,4 +26,15 @@ BUILD_PARAMS="KERNEL_SRC_DIR=${KERNEL_DIR}"
 src_unpack() {
 	unpack ${A}
 	epatch "${FILESDIR}/no-config.h-fix.patch"
+}
+
+src_install() {
+	linux-mod_src_install
+	
+	execinto "/$(get_libdir)/udev"
+	doexe "${FILESDIR}/${PN}-cal" ||
+		die "${PN}-cal script not installed properly"
+	insinto "/etc/udev/rules.d"
+	newins "${FILESDIR}/${PN}.rules" "40-${PN}.rules" ||
+		die "${PN} udev rules not installed properly"
 }

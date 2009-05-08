@@ -1,0 +1,2 @@
+#!/bin/sh
+chroot /mnt/initfs /usr/bin/wlan-cal
