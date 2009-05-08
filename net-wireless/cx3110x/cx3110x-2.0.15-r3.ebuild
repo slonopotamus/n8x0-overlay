@@ -4,7 +4,6 @@
 
 inherit linux-mod
 
-IUSE=""
 MY_PN="${PN}-module-src"
 DESCRIPTION="${PN} wifi driver"
 SRC_URI="http://repository.mer.tspre.org/pool/main/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz"
@@ -13,6 +12,7 @@ HOMEPAGE="http://www.maemo.org"
 
 SLOT="0"
 KEYWORDS="~arm"
+IUSE="debug"
 
 DEPEND="virtual/linux-sources"
 RDEPEND="
@@ -22,11 +22,17 @@ RDEPEND="
 	)
 "
 
-S="${WORKDIR}/${MY_PN}"
+S="${WORKDIR}/${MY_PN}/src"
 
-MODULE_NAMES="${PN}(kernel/drivers/net/wireless:${S}:${S}/src) ${PN}_mt(kernel/drivers/net/wireless:${S}:${S}/src)"
 BUILD_TARGETS="clean modules"
 BUILD_PARAMS="KERNEL_SRC_DIR=${KERNEL_DIR}"
+if use debug; then
+	MODULE_NAMES="${PN}_mt(kernel/drivers/net/wireless:${S}:${S}/src)"
+	BUILD_PARAMS="${BUILD_PARAMS} CONFIG_CX3110X_STA=m"
+else
+	MODULE_NAMES="${PN}(kernel/drivers/net/wireless:${S}:${S}/src)"
+	BUILD_PARAMS="${BUILD_PARAMS} CONFIG_CX3110X_PROD=m"
+fi
 
 src_unpack() {
 	unpack ${A}
