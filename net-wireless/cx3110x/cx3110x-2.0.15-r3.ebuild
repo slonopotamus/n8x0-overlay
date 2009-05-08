@@ -42,6 +42,10 @@ src_unpack() {
 src_install() {
 	linux-mod_src_install
 	
+	local blobmod=umac
+	use debug && blobmod=mtum
+	dosym "/mnt/initfs/lib/modules/${KV_FULL}/${blobmod}" "/lib/modules/${KV_FULL}/kernel/drivers/net/wireless/${blobmod}"
+	
 	exeinto "/$(get_libdir)/udev"
 	doexe "${FILESDIR}/${PN}-cal" ||
 		die "${PN}-cal script not installed properly"
