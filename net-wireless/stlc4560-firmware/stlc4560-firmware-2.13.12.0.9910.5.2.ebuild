@@ -24,5 +24,5 @@ S="${WORKDIR}"
 
 src_install() {
 	insinto /lib/firmware/
-	newins "${A}" 3826.arm
+	newins "${DISTDIR}/${A}" 3826.arm
 }
