@@ -26,6 +26,16 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 	keyboard? ( sys-apps/kbd[512keys] )
 	X? (
 		x11-misc/nokia-tablets-pointercal
-		x11-base/xorg-server[tslib,xorg,input_devices_evdev,input_devices_tslib]
-		x11-drivers/xf86-video-omapfb
+		x11-base/xorg-server[tslib,xorg,input_devices_evdev,input_devices_tslib,video_cards_fbdev]
 	)"
+
+pkg_postinst() {
+	ewarn "If you're updating from <0.3 version of ${PN},"
+	ewarn "update your 'Device' section in /etc/X11/xorg.conf"
+	ewarn "because we switched from xf86-video-omapfb to xf86-video-fbdev"
+	echo
+	ewarn 'Section "Device"'
+	ewarn '  Identifier      "device"'
+	ewarn '  Driver          "fbdev"'
+	ewarn 'EndSection'
+}
