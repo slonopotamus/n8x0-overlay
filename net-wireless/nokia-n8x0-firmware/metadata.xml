@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
+<use>
+        <flag name='n800'>Symlink N800 firmwares only</flag>
+        <flag name='n810'>Symlink N810 firmwares only</flag>
+        <flag name='wimax'>Symlink WiMax firmware</flag>
+</use>
 </pkgmetadata>
