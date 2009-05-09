@@ -6,6 +6,7 @@ depend() {
 
 start() {
 	ebegin "Loading cx3110x module"
+	insmod /mnt/initfs/lib/modules/`uname -r`/umac.ko
 	modprobe cx3110x || modprobe cx3110x_mt
 	eend $?
 	ebegin "Calibrating wlan.."
