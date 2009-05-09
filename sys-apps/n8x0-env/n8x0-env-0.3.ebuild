@@ -13,7 +13,7 @@ KEYWORDS="~arm"
 RDEPEND="sys-apps/nit-bootmenu-compat
 	sys-kernel/diablo-sources
 	bluetooth? (
-		net-wireless/nokia-n8x0-firmware
+		net-wireless/nokia-n8x0-firmware[bluetooth]
 		net-wireless/bluez-utils
 	)
 	gps? (
