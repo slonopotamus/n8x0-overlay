@@ -20,7 +20,7 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		sci-geosciences/gps5300driver
 	)
 	wifi? (
-		net-wireless/tablet-wireless
+		net-wireless/cx3110x
 		net-wireless/wireless-tools
 	)
 	keyboard? ( sys-apps/kbd[512keys] )
