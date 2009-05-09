@@ -20,6 +20,12 @@ RDEPEND="
 		!n800? (
 			!net-wireless/stlc4560-firmware
 		)
+		n800? (
+			!net-wireless/stlc4550-firmware
+		)
+		!n810? (
+			!net-wireless/stlc4550-firmware
+		)
 	)
 "
 
