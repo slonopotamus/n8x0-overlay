@@ -8,7 +8,7 @@ SRC_URI=""
 DESCRIPTION="symlinks to binary Nokia N8x0 wifi, bluetooth, and WiMax firmwares"
 KEYWORDS="~arm"
 SLOT="0"
-LICENSE="as-is"
+LICENSE="GPL-2"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 IUSE="bluetooth n800 n810 wifi wimax"
 
