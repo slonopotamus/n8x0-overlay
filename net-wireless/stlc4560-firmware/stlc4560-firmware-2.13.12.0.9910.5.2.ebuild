@@ -15,10 +15,7 @@ IUSE=""
 RESTRICT="mirror installsources bindist"
 
 DEPEND=''
-RDEPEND="${DEPEND}"'
-	!net-wireless/nokia-n8x0-firmware[wifi,n810]
-	!net-wireless/nokia-n8x0-firmware[wifi,-n800]
-'
+RDEPEND="!net-wireless/nokia-n8x0-firmware[wifi]"
 
 S="${WORKDIR}"
 
