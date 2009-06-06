@@ -4,7 +4,7 @@
 
 EAPI=2
 
-IUSE="bluetooth gps wifi X keyboard"
+IUSE="bluetooth gps stlc45xx wifi +wifi-calibrate X keyboard"
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
@@ -20,7 +20,19 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		sci-geosciences/gps5300driver
 	)
 	wifi? (
+		|| (
+			net-wireless/nokia-n8x0-firmware[wifi]
+			net-wireless/stlc4550-firmware
+			net-wireless/stlc4560-firmware
+		)
+		!stlc45xx? (
 		net-wireless/cx3110x
+		)
+		stlc45xx? (
+			wifi-calibrate? (
+				net-wireless/stlc45xx-cal
+			)
+		)
 		net-wireless/wireless-tools
 	)
 	keyboard? ( sys-apps/kbd[512keys] )
