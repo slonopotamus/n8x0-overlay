@@ -1,0 +1,3 @@
+#!/bin/sh
+DSME_SOCKFILE='/var/run/nokia/dsmesock' \
+/sbin/stlc45xx-cal
