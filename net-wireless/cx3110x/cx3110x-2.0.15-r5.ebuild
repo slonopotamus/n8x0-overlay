@@ -14,10 +14,11 @@ HOMEPAGE="http://www.maemo.org"
 
 SLOT="0"
 KEYWORDS="~arm"
-IUSE="debug"
+IUSE="debug +udev"
 
 DEPEND="virtual/linux-sources"
 RDEPEND="
+	udev? ( sys-fs/udev )
 	|| (
 		net-wireless/nokia-n8x0-firmware[wifi]
 		net-wireless/stlc4550-firmware
@@ -53,10 +54,12 @@ src_install() {
 	use debug && blobmod=mtum
 	dosym "/mnt/initfs/lib/modules/${KV_FULL}/${blobmod}.ko" "/lib/modules/${KV_FULL}/kernel/drivers/net/wireless/${blobmod}.ko"
 
+	if use udev; then
 	exeinto "/$(get_libdir)/udev"
 	doexe "${FILESDIR}/${PN}-cal" ||
 		die "${PN}-cal script not installed properly"
 	insinto "/etc/udev/rules.d"
 	newins "${FILESDIR}/${PN}.rules" "40-${PN}.rules" ||
 		die "${PN} udev rules not installed properly"
+	fi
 }
