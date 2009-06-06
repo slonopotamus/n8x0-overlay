@@ -29,7 +29,7 @@ pkg_nofetch() {
 
 src_install() {
 	exeinto "/sbin"
-	doexe "${DISTDIR}/${A}" ||
+	newexe "${DISTDIR}/${A}" "${PN}" ||
 		die "${PN} binary not installed properly"
 	
 	if use udev; then
