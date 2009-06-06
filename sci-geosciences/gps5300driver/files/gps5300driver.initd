@@ -25,12 +25,15 @@ start() {
 	[ -z "${GPS5300_USER}" ] && GPS5300_USER=root
 	export GPS5300_USER
 	
+	[ -z "${GPS5300_NICE}" ] && GPS5300_NICE=0
+	
 	start-stop-daemon --start \
 		--quiet \
 		--background \
 		--pidfile "${GPS5300_PIDFILE}" \
 		--make-pidfile \
 		--env "LD_PRELOAD=${GPS5300_PRELOAD}" \
+		--nicelevel "${GPS5300_NICE}" \
 		--exec "${GPS5300_DRIVER}"
 	eend $?
 }

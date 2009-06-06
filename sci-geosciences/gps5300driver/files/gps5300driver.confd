@@ -5,3 +5,6 @@ GPS5300_USER=root
 
 # Whether the driver will self-initialize
 GPS5300_SELFINIT=true
+
+# Priority of the driver
+GPS5300_NICE=-10
