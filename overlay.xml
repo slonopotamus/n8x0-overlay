@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layman>
+  <overlay name="n8x0"
+    type="git"
+    src="git://slonopotamus.org/overlay"
+    contact="luke_n8x0_overlay@dashjr.org"
+    status="unofficial">
+    <link>
+      http://slonopotamus.org/gentoo-on-n8x0
+    </link>
+    <description>Packages to support Nokia Internet Tablets (N8x0)</description>
+  </overlay>
+</layman>
