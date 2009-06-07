@@ -5,7 +5,7 @@
 EAPI=2
 
 DESCRIPTION="binary firmware for stlc4560 wifi chip"
-HOMEPAGE=""
+HOMEPAGE="http://daemonizer.de/prism54/prism54-fw/"
 LICENSE="Copyright"
 
 SRC_URI="http://daemonizer.de/prism54/prism54-fw/${PN/-firmware/}/${PV/9910/a}.arm"
