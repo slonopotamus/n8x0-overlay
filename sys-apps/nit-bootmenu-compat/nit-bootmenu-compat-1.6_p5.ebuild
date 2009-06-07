@@ -4,7 +4,7 @@
 
 inherit eutils
 
-SRC_URI="http://download.opensuse.org/repositories/Maemo://Mer://Devel://HW://N8x0/MerDevel_Ubuntu_9.04/armel/${PN}_${PV/_p/mer}.tar.gz"
+SRC_URI="http://repository.mer.tspre.org/pool/main/n/${PN}/${PN}_${PV/_p/mer}.tar.gz"
 KEYWORDS="~arm"
 SLOT="0"
 LICENSE="BSD"
