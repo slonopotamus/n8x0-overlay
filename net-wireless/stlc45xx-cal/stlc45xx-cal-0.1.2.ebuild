@@ -4,6 +4,8 @@
 
 EAPI=1
 
+inherit multilib
+
 tPN="${PN/-cal/}"
 DESCRIPTION="Calibration tool for the stlc45xx wifi driver"
 SRC_URI="http://tablets-dev.nokia.com:80/d2.php?f=${P}&/${P}"
