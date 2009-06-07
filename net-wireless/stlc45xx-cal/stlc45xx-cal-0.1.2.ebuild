@@ -21,7 +21,8 @@ RDEPEND="
 	udev? ( sys-fs/udev )
 "
 
-RESTRICT="fetch mirror"
+RESTRICT="installsources fetch mirror"
+QA_PRESTRIPPED="./sbin/${PN}"
 
 pkg_nofetch() {
 	einfo "Please download (click through license):"
