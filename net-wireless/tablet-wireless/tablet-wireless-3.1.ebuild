@@ -22,22 +22,8 @@ RDEPEND="
 	)
 "
 
-S="${WORKDIR}"
-src_compile() {
-	local remove
-	if use stlc45xx; then
-		remove="IF:cx3110x"
-	else
-		remove="IF:stlc45xx"
-	fi
-	use wifi-calibrate ||
-		remove="${remove}\\|IF:cal"
-	grep -v "$remove" "${FILESDIR}/${PN}.init" \
-		> "${S}/${PN}"
-}
-
 src_install() {
-	doinitd "${S}/${PN}"
+	newinitd "${FILESDIR}/${PN}.init" "${PN}"
 }
 
 pkg_postinst() {
