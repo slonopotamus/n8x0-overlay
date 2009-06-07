@@ -8,6 +8,7 @@ GPS5300_PIDFILE='/var/run/gps5300driver.pid'
 GPS5300_PRELOAD='/usr/lib/libgps5300faker.so'
 
 depend() {
+	need dbus
 	before gpsd
 }
 
