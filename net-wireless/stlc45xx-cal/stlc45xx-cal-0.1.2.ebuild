@@ -34,7 +34,7 @@ src_install() {
 	exeinto "/sbin"
 	newexe "${DISTDIR}/${A}" "${PN}" ||
 		die "${PN} binary not installed properly"
-	
+
 	if use udev; then
 		exeinto "/$(get_libdir)/udev"
 		doexe "${FILESDIR}/${PN}" ||
