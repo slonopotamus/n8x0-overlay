@@ -4,7 +4,7 @@
 
 EAPI=2
 
-IUSE="bluetooth gps stlc45xx wifi +wifi-calibrate X keyboard"
+IUSE="bluetooth cx3110x gps stlc45xx wifi +wifi-calibrate X keyboard"
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
@@ -27,6 +27,9 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		)
 		!stlc45xx? (
 		net-wireless/cx3110x
+		)
+		cx3110x? (
+			net-wireless/cx3110x
 		)
 		stlc45xx? (
 			wifi-calibrate? (
