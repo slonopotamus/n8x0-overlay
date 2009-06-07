@@ -10,10 +10,13 @@ KEYWORDS="~arm"
 SLOT="0"
 LICENSE="BSD"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
-IUSE="stlc45xx +wifi-calibrate"
+IUSE="cx3110x stlc45xx +wifi-calibrate"
 RDEPEND="
 	!stlc45xx? (
 	net-wireless/cx3110x
+	)
+	cx3110x? (
+		net-wireless/cx3110x
 	)
 	stlc45xx? (
 		wifi-calibrate? (
