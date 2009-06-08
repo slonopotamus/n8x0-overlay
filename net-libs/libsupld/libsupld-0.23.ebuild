@@ -6,7 +6,10 @@ DESCRIPTION="Library for interfacing supl-daemon."
 HOMEPAGE="http://nokia.com"
 LICENSE="BSD NoSourceAvailable"
 
-SRC_URI="mirror://n8x0/updates/diablo/${PN}1_${PV}_armel.deb"
+SRC_URI="
+	mirror://n8x0/updates/diablo/${PN}1_${PV}_armel.deb
+	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${PN}1_${PV}_armel.deb
+"
 SLOT="1"
 KEYWORDS="-* ~arm"
 IUSE=""
