@@ -28,16 +28,12 @@ src_install() {
 	doinitd etc/init.d/nit-boot-basics
 }
 
-pkg_preinst() {
-	# Can't install a .keep here, since it's read-only
-	mkdir --mode=000 -p /mnt/initfs
-}
-
 pkg_postinst() {
 	einfo "Please add 'nit-boot-basics' init script to boot services"
 	einfo "by running: rc-update add nit-boot-basics boot"
-	ewarn "If you just upgraded in a chroot (not live), please check"
-	ewarn "to ensure that /mnt/initfs exists and, if not, mkdir it."
+	
+	# Can't install a .keep here, since it's read-only
+	mkdir --mode=000 -p /mnt/initfs
 }
 
 pkg_postrm() {
