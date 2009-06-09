@@ -8,7 +8,7 @@ SNAPSHOT="yes"
 inherit x-modular
 
 MY_PN='xserver-xorg-video-omapfb'
-MY_PV="${PV}-1-mer2"
+MY_PV="0.1.20090123-1-mer2"
 SRC_URI="
 	http://repository.mer.tspre.org/pool/main/x/${MY_PN}/${MY_PN}_${MY_PV}.tar.gz
 "
