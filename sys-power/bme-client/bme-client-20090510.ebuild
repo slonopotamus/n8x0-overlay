@@ -10,6 +10,7 @@ IUSE=''
 DEPEND='
 '
 RDEPEND='
+	sys-apps/nit-bootmenu-compat
 '
 
 S="${WORKDIR}"
