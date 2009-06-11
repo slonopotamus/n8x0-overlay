@@ -24,6 +24,5 @@ src_compile() {
 }
 
 src_install() {
-	bininto '/usr/bin'
 	dobin "${PN}"
 }
