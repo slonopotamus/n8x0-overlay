@@ -20,6 +20,6 @@ KEYWORDS="~arm"
 RDEPEND="x11-base/xorg-server"
 DEPEND="${RDEPEND}
 	x11-proto/renderproto"
-S="${WORKDIR}/${MY_PN}"
+S="${WORKDIR}/${P/_p*/}"
 IUSE=""
 LICENSE="as-is"
