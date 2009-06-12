@@ -1,6 +1,6 @@
 DESCRIPTION="Simple command-line Battery Management Entity client"
 HOMEPAGE="http://wiki.maemo.org/Mer/Documentation/BME_Protocol"
-LICENSE="Unknown"
+LICENSE="GPL-2"
 
 SLOT='0'
 KEYWORDS='~arm'
