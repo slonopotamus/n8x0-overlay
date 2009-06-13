@@ -3,5 +3,6 @@
 <pkgmetadata>
 <use>
         <flag name='udev'>Install udev rules</flag>
+        <flag name='we-18'>Include WE-18 (Linux WPA) support</flag>
 </use>
 </pkgmetadata>

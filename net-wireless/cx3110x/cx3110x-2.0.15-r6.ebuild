@@ -7,17 +7,23 @@ EAPI=2
 inherit linux-mod
 
 MY_PN="${PN}-module-src"
+WPA_PATCH="deblet-${PN}.patch"
 DESCRIPTION="${PN} wifi driver"
 SRC_URI="
 	http://repository.maemo.org/pool/maemo4.1/free/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${MY_PN}_${PV}-1.tar.gz
+	
+	we-18? (
+		http://trac.tspre.org/projects/deblet/export/457/trunk/packages/main/${MY_PN}/patches/${WPA_PATCH}
+		http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${WPA_PATCH}
+	)
 "
 LICENSE="GPL-2"
 HOMEPAGE="http://www.maemo.org"
 
 SLOT="0"
 KEYWORDS="~arm"
-IUSE="debug +udev"
+IUSE="debug +udev +we-18"
 
 DEPEND="virtual/linux-sources"
 RDEPEND="
@@ -33,7 +39,7 @@ RDEPEND="
 	!=net-wireless/stlc4560-firmware-2.13.12.0.9910.5.2
 "
 
-S="${WORKDIR}/${MY_PN}/src"
+S="${WORKDIR}/${MY_PN}-${PV}/src"
 
 BUILD_TARGETS="clean modules"
 BUILD_PARAMS="KERNEL_SRC_DIR=${KERNEL_DIR}"
@@ -48,6 +54,8 @@ fi
 src_unpack() {
 	unpack ${A}
 	epatch "${FILESDIR}/no-config.h-fix.patch"
+	use we-18 &&
+		epatch "${DISTDIR}/${WPA_PATCH}"
 }
 
 src_install() {
