@@ -10,7 +10,6 @@ MY_PN="${PN}-module-src"
 DESCRIPTION="${PN} wifi driver"
 SRC_URI="
 	http://repository.maemo.org/pool/maemo4.1/free/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz
-	http://repository.mer.tspre.org/pool/main/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${MY_PN}_${PV}-1.tar.gz
 "
 LICENSE="GPL-2"
