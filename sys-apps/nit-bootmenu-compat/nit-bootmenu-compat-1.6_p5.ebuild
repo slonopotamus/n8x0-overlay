@@ -31,7 +31,7 @@ src_install() {
 pkg_postinst() {
 	einfo "Please add 'nit-boot-basics' init script to boot services"
 	einfo "by running: rc-update add nit-boot-basics boot"
-	
+
 	# Can't install a .keep here, since it's read-only
 	mkdir --mode=000 -p /mnt/initfs
 }

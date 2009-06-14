@@ -1,3 +1,7 @@
+# Copyright 2009 Luke Dashjr
+# TODO: Luke, write licensing info here
+# $Header$
+
 DESCRIPTION="Simple command-line Battery Management Entity client"
 HOMEPAGE="http://wiki.maemo.org/Mer/Documentation/BME_Protocol"
 LICENSE="GPL-2"
