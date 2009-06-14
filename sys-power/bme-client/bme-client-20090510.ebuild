@@ -1,5 +1,5 @@
 # Copyright 2009 Luke Dashjr
-# TODO: Luke, write licensing info here
+# Distributed under the terms of the GNU General Public License v2
 # $Header$
 
 EAPI=2
