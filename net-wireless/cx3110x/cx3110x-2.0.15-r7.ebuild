@@ -10,23 +10,34 @@ MY_PN="${PN}-module-src"
 WPA_PATCH="deblet-${PN}.patch"
 DESCRIPTION="${PN} wifi driver"
 SRC_URI="
+	http://repository.maemo.org/pool/maemo4.1/free/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz
 	http://repository.maemo.org/pool/diablo/free/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${MY_PN}_${PV}-1.tar.gz
 
+	we-18? (
 	http://trac.tspre.org/projects/deblet/export/457/trunk/packages/main/${MY_PN}/patches/${WPA_PATCH}
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${WPA_PATCH}
+	)
 "
 LICENSE="GPL-2"
 HOMEPAGE="http://www.maemo.org"
 
 SLOT="0"
 KEYWORDS="~arm"
-IUSE="debug +udev"
+IUSE="debug +udev +we-18"
 
 DEPEND="virtual/linux-sources"
 RDEPEND="
 	udev? ( sys-fs/udev )
-	net-wireless/nokia-n8x0-firmware[wifi]
+	|| (
+		net-wireless/nokia-n8x0-firmware[wifi]
+		net-wireless/stlc4550-firmware
+		net-wireless/stlc4560-firmware
+	)
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.13.14
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.22.0
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.23
+	!=net-wireless/stlc4560-firmware-2.13.12.0.9910.5.2
 "
 
 S="${WORKDIR}/${MY_PN}-${PV}/src"
@@ -45,6 +56,7 @@ src_unpack() {
 	unpack ${A}
 
 	epatch "${FILESDIR}/no-config.h-fix.patch"
+	use we-18 &&
 	epatch "${DISTDIR}/${WPA_PATCH}"
 }
 

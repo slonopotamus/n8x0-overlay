@@ -20,6 +20,10 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		sci-geosciences/gps5300driver
 	)
 	wifi? (
+		|| (
+			net-wireless/nokia-n8x0-firmware[wifi]
+			net-wireless/stlc4560-firmware
+		)
 		!stlc45xx? (
 			net-wireless/cx3110x
 		)
@@ -27,7 +31,6 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 			net-wireless/cx3110x
 		)
 		stlc45xx? (
-			net-wireless/stlc4560-firmware
 			wifi-calibrate? (
 				net-wireless/stlc45xx-cal
 			)
