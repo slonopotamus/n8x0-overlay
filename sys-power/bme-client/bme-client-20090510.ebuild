@@ -1,3 +1,7 @@
+# Copyright 2009 Luke Dashjr
+# TODO: Luke, write licensing info here
+# $Header$
+
 EAPI=2
 
 DESCRIPTION="Simple command-line Battery Management Entity client"

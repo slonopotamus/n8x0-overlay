@@ -1,6 +1,6 @@
-diff -ur cx3110x-module-src.orig/src/sm_drv_spi.c cx3110x-module-src/src/sm_drv_spi.c
+diff -ur cx3110x-module-src.orig/src/sm_drv_spi.c cx3110x-module-src-2.0.15/src/sm_drv_spi.c
 --- cx3110x-module-src.orig/src/sm_drv_spi.c	2008-09-16 01:37:49.000000000 +0400
-+++ cx3110x-module-src/src/sm_drv_spi.c	2009-03-25 19:16:18.000000000 +0300
++++ cx3110x-module-src-2.0.15/src/sm_drv_spi.c	2009-03-25 19:16:18.000000000 +0300
 @@ -36,7 +36,6 @@
  #include <linux/platform_device.h>
  #include <linux/string.h>

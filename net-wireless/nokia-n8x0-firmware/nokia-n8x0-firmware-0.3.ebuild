@@ -15,7 +15,6 @@ IUSE="bluetooth wifi wimax"
 RDEPEND="
 	wifi? (
 		!net-wireless/stlc4560-firmware
-		!net-wireless/stlc4550-firmware
 	)
 "
 

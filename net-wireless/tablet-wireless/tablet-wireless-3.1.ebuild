@@ -10,26 +10,19 @@ KEYWORDS="~arm"
 SLOT="0"
 LICENSE="BSD"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
-IUSE="cx3110x stlc45xx +wifi-calibrate"
+IUSE="cx3110x stlc45xx"
 RDEPEND="
 	!stlc45xx? (
-	net-wireless/cx3110x
+		net-wireless/cx3110x
 	)
 	cx3110x? (
 		net-wireless/cx3110x
 	)
 	stlc45xx? (
-		wifi-calibrate? (
-			net-wireless/stlc45xx-cal
-		)
+		net-wireless/stlc45xx-cal
 	)
 "
 
 src_install() {
 	newinitd "${FILESDIR}/${PN}.init" "${PN}"
-}
-
-pkg_postinst() {
-	einfo "Please add '${PN}' init script to boot services"
-	einfo "by running: rc-update add ${PN} boot"
 }
