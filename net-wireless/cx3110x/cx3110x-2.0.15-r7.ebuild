@@ -55,6 +55,7 @@ fi
 src_unpack() {
 	unpack ${A}
 
+	cd "${S}"
 	epatch "${FILESDIR}/no-config.h-fix.patch"
 	use we-18 &&
 	epatch "${DISTDIR}/${WPA_PATCH}"
