@@ -18,8 +18,10 @@ S="${WORKDIR}/${PN}"
 
 src_unpack() {
 	unpack ${A}
+	
+	cd "${S}"
 	epatch "${FILESDIR}/gentoofy.patch"
-	epatch "${FILESDIR}/nokia_tmp.patch"
+	epatch "${FILESDIR}/var_nokia.patch"
 }
 
 src_install() {

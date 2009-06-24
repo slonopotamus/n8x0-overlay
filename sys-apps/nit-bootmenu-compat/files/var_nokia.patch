@@ -1,0 +1,31 @@
+diff -ru nit-bootmenu-compat/etc/init.d/nit-boot-basics nit-bootmenu-compat.var_nokia/etc/init.d/nit-boot-basics
+--- nit-bootmenu-compat/etc/init.d/nit-boot-basics	2009-06-23 20:50:09.000000000 -0500
++++ nit-bootmenu-compat.var_nokia/etc/init.d/nit-boot-basics	2009-06-23 20:54:20.000000000 -0500
+@@ -2,7 +2,15 @@
+ 
+ description="Adjusts NIT kernel parameters for better powersaving."
+ 
++depend() {
++	after bootmisc
++}
++
+ start() {
++	ebegin "Mounting /var/run/nokia"
++	mount -o bind /mnt/initfs/tmp/ /var/run/nokia/
++	eend $?
++	
+ 	ebegin "Adjusting kernel parameters"
+ 	# activate lowmem module
+ 	echo 92 > /proc/sys/vm/lowmem_deny_watermark
+Only in nit-bootmenu-compat.var_nokia/etc/init.d: nit-boot-basics~
+diff -ru nit-bootmenu-compat/linuxrc nit-bootmenu-compat.var_nokia/linuxrc
+--- nit-bootmenu-compat/linuxrc	2009-06-23 20:50:09.000000000 -0500
++++ nit-bootmenu-compat.var_nokia/linuxrc	2009-06-23 20:53:48.000000000 -0500
+@@ -5,7 +5,6 @@
+ 	ROOT_PLACE=/mnt/new_root/mer_tmp
+ fi
+ /usr/sbin/dsmetool --root-mounted 
+-mount -o bind /tmp $ROOT_PLACE/tmp
+ if [ -f  /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
+ 	echo -n "Enabling ondemand governor..."
+         echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
