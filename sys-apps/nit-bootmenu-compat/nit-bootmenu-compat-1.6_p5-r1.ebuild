@@ -18,7 +18,7 @@ S="${WORKDIR}/${PN}"
 
 src_unpack() {
 	unpack ${A}
-	
+
 	cd "${S}"
 	epatch "${FILESDIR}/gentoofy.patch"
 	epatch "${FILESDIR}/var_nokia.patch"

@@ -14,14 +14,15 @@ SRC_URI="http://www.conan.de/touchscreen/${P}.tar.bz2"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~arm ~x86"
 
-#RDEPEND="x11-base/xorg-server"
+IUSE=""
+RDEPEND="x11-base/xorg-server"
 DEPEND="${RDEPEND}
 	|| ( >=sys-kernel/linux-headers-2.6 >=sys-kernel/mips-headers-2.6 )
 	x11-proto/inputproto
 	x11-proto/randrproto
 	x11-proto/xproto"
 
-PATCHES="${FILESDIR}/${PN}-evcalibrate-path.patch"
+PATCHES=("${FILESDIR}/${PN}-evcalibrate-path.patch")
 CONFIGURE_OPTIONS="--enable-evcalibrate --enable-udevinstall"
 DOCS="README README.calibration TODO"
 
