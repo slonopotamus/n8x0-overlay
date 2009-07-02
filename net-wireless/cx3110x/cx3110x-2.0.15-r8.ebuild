@@ -57,8 +57,8 @@ src_unpack() {
 
 	cd "${S}"
 	epatch "${FILESDIR}/no-config.h-fix.patch"
-	use we-18 &&
-	epatch "${DISTDIR}/${WPA_PATCH}"
+	epatch "${FILESDIR}/notfix.patch"
+	use we-18 && epatch "${DISTDIR}/${WPA_PATCH}"
 }
 
 src_install() {
