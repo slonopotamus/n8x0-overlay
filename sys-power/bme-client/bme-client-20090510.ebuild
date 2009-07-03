@@ -24,7 +24,7 @@ RDEPEND='
 
 S="${WORKDIR}"
 
-src_unpack() {
+src_prepare() {
 	sed 's:/tmp/:/var/run/nokia/:' < "${DISTDIR}/${A}" > "${S}/${PN}.c"
 }
 

@@ -52,10 +52,7 @@ else
 	BUILD_PARAMS="${BUILD_PARAMS} CONFIG_CX3110X_STA=m"
 fi
 
-src_unpack() {
-	unpack ${A}
-
-	cd "${S}"
+src_prepare() {
 	epatch "${FILESDIR}/no-config.h-fix.patch"
 	epatch "${FILESDIR}/notfix.patch"
 	use we-18 && epatch "${DISTDIR}/${WPA_PATCH}"
