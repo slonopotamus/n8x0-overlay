@@ -11,4 +11,7 @@ LICENSE="GPL-3"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0#${PN}"
 IUSE=""
 RDEPEND=">=dev-libs/popt-1.10"
-DEPEND="${RDEPEND}"
+DEPEND="
+	virtual/linux-sources
+	${RDEPEND}
+"
