@@ -6,7 +6,7 @@ inherit eutils
 
 SRC_URI=""
 DESCRIPTION="symlinks to binary Nokia N8x0 wifi, bluetooth, and WiMax firmwares"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 SLOT="0"
 LICENSE="GPL-2"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"

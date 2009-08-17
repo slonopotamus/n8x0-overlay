@@ -9,7 +9,7 @@ HOMEPAGE="http://wiki.maemo.org/Mer/Documentation/BME_Protocol"
 LICENSE="GPL-2"
 
 SLOT='0'
-KEYWORDS='~arm'
+KEYWORDS='arm'
 SRC_URI="
 	http://bowman.infotech.monash.edu.au/~pmoulder/${PN}.c -> ${P}.c
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${P}.c
