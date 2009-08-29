@@ -18,7 +18,7 @@ $p{Hardware} = sub {
 	$v =~ m/^(\w+)\s(.*)$/;
 	my ($Brand, $Model) = ($1, $2);
 	$Brand = uc $Brand;
-	$Model = 'RX-33' if $Model eq 'N800';
+	$Model = 'RX-34' if $Model eq 'N800';
 	$user = "${Brand}-${user}-$Model";
 };
 $p{"Cache format"} = sub {
