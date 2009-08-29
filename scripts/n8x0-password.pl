@@ -16,7 +16,10 @@ $p{"CPU architecture"} = sub {
 $p{Hardware} = sub {
 	substr($pass, 1, 1) = uc substr($v, 1, 1);
 	$v =~ m/^(\w+)\s(.*)$/;
-	$user = (uc $1) . "-${user}-$2";
+	my ($Brand, $Model) = ($1, $2);
+	$Brand = uc $Brand;
+	$Model = 'RX-33' if $Model eq 'N800';
+	$user = "${Brand}-${user}-$Model";
 };
 $p{"Cache format"} = sub {
 	substr($pass, 3, 1) = substr($v, 0, 1);
