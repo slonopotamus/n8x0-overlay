@@ -24,7 +24,7 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 	wifi? (
 		|| (
 			net-wireless/nokia-n8x0-firmware[wifi]
-			net-wireless/stlc4560-firmware
+			net-wireless/stlc4550-firmware
 		)
 		!stlc45xx? (
 			net-wireless/cx3110x
