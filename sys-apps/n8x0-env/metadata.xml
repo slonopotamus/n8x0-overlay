@@ -3,8 +3,6 @@
 <pkgmetadata>
 <use>
         <flag name='cx3110x'>Use cx3110x driver</flag>
-        <flag name='keyboard'>Pull in keyboard support (needed for N810)</flag>
-        <flag name='nokia-osso-linux'>Use Nokia OSSO kernel</flag>
         <flag name='stlc45xx'>Use stlc45xx driver</flag>
         <flag name='wifi-calibrate'>Calibrate WLAN driver</flag>
 </use>
