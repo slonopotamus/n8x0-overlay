@@ -4,14 +4,16 @@
 
 EAPI=2
 
-IUSE="bluetooth cx3110x gps stlc45xx wifi +wifi-calibrate X keyboard sound"
+IUSE="alsa bluetooth cx3110x nokia-osso-linux gps stlc45xx wifi +wifi-calibrate X keyboard"
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 SLOT="0"
 KEYWORDS="~arm"
 RDEPEND="sys-apps/nit-bootmenu-compat
+	nokia-osso-linux? (
 	sys-kernel/diablo-sources
+	)
 	bluetooth? (
 		net-wireless/nokia-n8x0-firmware[bluetooth]
 		net-wireless/bluez-utils
@@ -38,7 +40,11 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		net-wireless/wireless-tools
 	)
 	keyboard? ( sys-apps/kbd[512keys] )
-	sound? ( media-sound/tablet-sound )
+	alsa? (
+		nokia-osso-linux? (
+			media-sound/tablet-sound
+		)
+	)
 	X? (
 		x11-misc/nokia-tablets-pointercal
 		x11-base/xorg-server[tslib,xorg,input_devices_evdev,input_devices_tslib]
