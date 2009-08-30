@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
-SRC_URI="mirror://n8x0/updates/diablo/${PN}-rx-44_${PV}_all.deb"
+uPN="${PN}-rx-44"
+SRC_URI="mirror://n8x0/updates/diablo/${uPN}_${PV}_all.deb"
 KEYWORDS="-* ~arm"
 SLOT="0"
 LICENSE="CopyrightNokia"
@@ -22,4 +23,7 @@ src_unpack() {
 
 src_install() {
 	doins -r lib || die
+	cd "usr/share/doc/${uPN}"
+	dodoc copyright
+	dodoc changelog.gz
 }
