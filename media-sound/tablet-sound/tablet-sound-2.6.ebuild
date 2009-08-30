@@ -15,7 +15,7 @@ HOMEPAGE="http://wiki.maemo.org/Mer"
 IUSE=""
 RDEPEND="
 	media-sound/alsa-utils
-	media-plugins/alsa-plugins[maemo]
+	media-plugins/alsa-plugins[nokia-osso-linux]
 	media-sound/osso-dsp-loader
 "
 
