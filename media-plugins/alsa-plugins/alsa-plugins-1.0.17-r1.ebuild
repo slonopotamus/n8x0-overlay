@@ -13,7 +13,7 @@ SRC_URI="mirror://alsaproject/plugins/${MY_P}.tar.bz2"
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
 KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 sh sparc x86"
-IUSE="debug ffmpeg jack libsamplerate pulseaudio speex maemo"
+IUSE="debug ffmpeg jack libsamplerate nokia-osso-linux pulseaudio speex"
 
 RDEPEND=">=media-libs/alsa-lib-${PV}
 	ffmpeg? ( media-video/ffmpeg )
@@ -49,15 +49,12 @@ src_unpack() {
 src_compile() {
 	use debug || append-flags -DNDEBUG
 
-	local myopts=""
-	if use maemo; then
-		myopts="--enable-maemo-plugin --enable-maemo-resource-manager"
-	fi
-
-	econf ${myopts} \
+	econf \
 		$(use_enable ffmpeg avcodec) \
 		$(use_enable jack) \
 		$(use_enable libsamplerate samplerate) \
+		$(use_enable nokia-osso-linux maemo-plugin) \
+		$(use_enable nokia-osso-linux maemo-resource-manager) \
 		$(use_enable pulseaudio) \
 		$(use_with speex speex lib) \
 		--disable-dependency-tracking \
@@ -72,6 +69,7 @@ src_install() {
 	dodoc upmix.txt vdownmix.txt README-pcm-oss
 	use jack && dodoc README-jack
 	use libsamplerate && dodoc samplerate.txt
+	use nokia-osso-linux && dodoc README-maemo
 	use pulseaudio && dodoc README-pulse
 	use ffmpeg && dodoc lavcrate.txt a52.txt
 }
