@@ -1,0 +1,200 @@
+diff -ur osso-dsp-loader-0.5.6.orig/debian/changelog osso-dsp-loader-0.5.6/debian/changelog
+--- osso-dsp-loader-0.5.6.orig/debian/changelog	2008-04-23 09:19:31.000000000 +0400
++++ osso-dsp-loader-0.5.6/debian/changelog	2009-06-14 00:29:52.000000000 +0400
+@@ -1,3 +1,39 @@
++osso-dsp-loader (0.5.6-4deblet3mer3) jaunty; urgency=low
++
++  * Fix buffer overflow.
++
++ -- Carsten Munk <cvm@cs.au.dk>  Sat, 13 Jun 2009 20:29:42 +0000
++
++osso-dsp-loader (0.5.6-4deblet3mer2) jaunty; urgency=low
++
++  * Does this at all need kernel-diablo-headers?
++
++ -- Carsten Munk <cvm@cs.au.dk>  Wed, 06 May 2009 20:11:37 +0000
++
++osso-dsp-loader (0.5.6-4deblet3mer1) unstable; urgency=low
++
++  * Mer-ify.
++
++ -- Carsten Munk <cvm@cs.au.dk>  Sun, 05 Apr 2009 19:20:25 +0000
++
++osso-dsp-loader (0.5.6-4deblet3) unstable; urgency=low
++
++  * Rollback
++
++ -- Carsten Munk <cvm@cs.au.dk>  Sat, 11 Oct 2008 23:08:08 +0200
++
++osso-dsp-loader (0.5.6-4deblet2) hardy; urgency=low
++
++  * Fix problem with udev names for devices.
++
++ -- Carsten Munk <cvm@cs.au.dk>  Sat, 11 Oct 2008 23:08:08 +0200
++
++osso-dsp-loader (0.5.6-4deblet1) unstable; urgency=low
++
++  * Added bison, flex build-dependancy.
++
++ -- Carsten Munk <cvm@cs.au.dk>  Sun, 14 Sep 2008 21:03:22 +0200
++
+ osso-dsp-loader (0.5.6-4) unstable; urgency=low
+ 
+   * Dependency changed, rx-34-kernel-headers to kernel-diablo-headers
+diff -ur osso-dsp-loader-0.5.6.orig/debian/control osso-dsp-loader-0.5.6/debian/control
+--- osso-dsp-loader-0.5.6.orig/debian/control	2008-04-23 09:19:31.000000000 +0400
++++ osso-dsp-loader-0.5.6/debian/control	2009-05-07 00:10:28.000000000 +0400
+@@ -1,19 +1,19 @@
+ Source: osso-dsp-loader
+-Section: libs
++Section: contrib/libs
+ Priority: optional
+ Maintainer: Andrea Ambrosioni <andrea.ambrosioni@nokia.com>
+-Build-Depends: debhelper (>= 4.0.0), kernel-diablo-headers 
++Build-Depends: debhelper (>= 4.0.0), bison, flex, autoconf, libtool, automake
+ Standards-Version: 3.6.0
+ 
+ Package: osso-dsp-loader
+ Architecture: any
+-Depends: ${shlibs:Depends}, osso-multimedia-dsp (>=1.7)
++Depends: ${shlibs:Depends}, osso-dsp-modules-rx-44 | osso-dsp-modules-rx-34
+ Description: DSP loader for OSSO Multimedia framework
+  DSP loader for OSSO Multimedia framework
+ 
+ Package: osso-dsp-loader-dbg
+ Architecture: any
+-Section: devel
++Section: contrib/devel
+ Depends:  osso-dsp-loader (= ${Source-Version})
+ Description: Debug symbols for osso-dsp-loader. 
+  This package inscludes debug symbols for osso-dsp-loader.
+diff -ur osso-dsp-loader-0.5.6.orig/debian/osso-dsp-loader.dsp-init.init osso-dsp-loader-0.5.6/debian/osso-dsp-loader.dsp-init.init
+--- osso-dsp-loader-0.5.6.orig/debian/osso-dsp-loader.dsp-init.init	2007-02-07 14:34:51.000000000 +0300
++++ osso-dsp-loader-0.5.6/debian/osso-dsp-loader.dsp-init.init	2009-04-05 23:22:41.000000000 +0400
+@@ -1,4 +1,13 @@
+ #!/bin/sh
++### BEGIN INIT INFO
++# Provides:          dsp-init
++# Required-Start:    $remote_fs $syslog
++# Required-Stop:     $remote_fs $syslog
++# Default-Start:     2 3 4 5
++# Default-Stop:      0 1 6
++# Short-Description: Start daemon at boot time
++# Description:       Enable service provided by daemon.
++### END INIT INFO
+ 
+ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+ 
+@@ -15,19 +24,15 @@
+         fi
+         if [ -x /usr/sbin/dsp_dld ]
+         then
+-            /usr/sbin/dsmetool -c 5 -T 300 -t "/usr/sbin/dsp_dld -p --disable-restart -c /lib/dsp/dsp_dld_avs.conf"
+-        fi
+-        echo "done."
+-        ;;
+-  stop)
+-        if [ -x /usr/sbin/dsp_dld ]
+-        then
+-            /usr/sbin/dsmetool -k /usr/sbin/dsp_dld
+-        fi
+-        ;;
+-  restart|force-reload)
+-        ;;
+-  *)
++            /usr/sbin/dsp_dld -p --disable-restart -c /lib/dsp/dsp_dld_avs.conf &
++	fi
++	echo "done."
++	;;
++   stop)
++	;;
++   restart|force-reload)
++	;;
++   *) 
+         N=/etc/init.d/dsp-init
+         echo "Usage: $N {start|stop|restart|force-reload}" >&2
+         exit 1
+@@ -36,3 +41,4 @@
+ 
+ exit 0
+ 
++	
+\ No newline at end of file
+diff -ur osso-dsp-loader-0.5.6.orig/debian/rules osso-dsp-loader-0.5.6/debian/rules
+--- osso-dsp-loader-0.5.6.orig/debian/rules	2007-07-05 21:26:55.000000000 +0400
++++ osso-dsp-loader-0.5.6/debian/rules	2009-04-05 23:22:41.000000000 +0400
+@@ -41,7 +41,7 @@
+ config.status: configure
+ 	dh_testdir
+ 	 # Add here commands to configure the package.
+-	CFLAGS="$(CFLAGS)" EXTENDED_CFLAGS="$(CFLAGS)" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info LEX=flex-old --enable-tweaks --enable-hash
++	CFLAGS="$(CFLAGS)" EXTENDED_CFLAGS="$(CFLAGS)" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --enable-tweaks --enable-hash
+ 
+ build: build-stamp
+ build-stamp: config.status 
+diff -ur osso-dsp-loader-0.5.6.orig/dsp_dld/configure.in osso-dsp-loader-0.5.6/dsp_dld/configure.in
+--- osso-dsp-loader-0.5.6.orig/dsp_dld/configure.in	2007-07-05 21:26:55.000000000 +0400
++++ osso-dsp-loader-0.5.6/dsp_dld/configure.in	2009-04-05 23:22:41.000000000 +0400
+@@ -1,5 +1,5 @@
+-AC_INIT(dsp_dld.c)
+-AM_INIT_AUTOMAKE(dsp_dld, 0.0.1)
++AC_INIT(dsp_dld, 0.0.1)
++AM_INIT_AUTOMAKE
+ 
+ AC_PROG_MAKE_SET
+ AC_PROG_CC
+diff -ur osso-dsp-loader-0.5.6.orig/dsp_dld/dsp_dld.c osso-dsp-loader-0.5.6/dsp_dld/dsp_dld.c
+--- osso-dsp-loader-0.5.6.orig/dsp_dld/dsp_dld.c	2007-07-06 15:38:32.000000000 +0400
++++ osso-dsp-loader-0.5.6/dsp_dld/dsp_dld.c	2009-06-14 00:29:34.000000000 +0400
+@@ -443,8 +443,8 @@
+ 	int fd;
+ 	int i, ret;
+ 	char name[OMAP_DSP_TNM_LEN];
+-	char path1[20];
+-	char path2[20 + OMAP_DSP_TNM_LEN];
++	char path1[200];
++	char path2[200 + OMAP_DSP_TNM_LEN];
+ 	struct stat file_stat;
+ 	char *p;
+ 
+@@ -505,8 +505,8 @@
+ 	int i;
+ 	int ret = 0;
+ 	char name[OMAP_DSP_TNM_LEN];
+-	char path1[20];
+-	char path2[20 + OMAP_DSP_TNM_LEN];
++	char path1[200];
++	char path2[200 + OMAP_DSP_TNM_LEN];
+ 	char *p;
+ 
+ 	for (i = 0; i < n; i++) {
+diff -ur osso-dsp-loader-0.5.6.orig/dspctl/autogen.sh osso-dsp-loader-0.5.6/dspctl/autogen.sh
+--- osso-dsp-loader-0.5.6.orig/dspctl/autogen.sh	2007-08-01 18:33:18.000000000 +0400
++++ osso-dsp-loader-0.5.6/dspctl/autogen.sh	2009-04-05 23:22:41.000000000 +0400
+@@ -1,8 +1,6 @@
+ #!/bin/sh
+ 
+ set -x
+-aclocal-1.7
++aclocal
+ autoconf
+-automake-1.7 --add-missing --copy --foreig
+-
+-
++automake --add-missing --copy --foreign
+\ No newline at end of file
+diff -ur osso-dsp-loader-0.5.6.orig/dspctl/configure.in osso-dsp-loader-0.5.6/dspctl/configure.in
+--- osso-dsp-loader-0.5.6.orig/dspctl/configure.in	2007-02-07 14:34:51.000000000 +0300
++++ osso-dsp-loader-0.5.6/dspctl/configure.in	2009-04-05 23:22:41.000000000 +0400
+@@ -1,9 +1,8 @@
+-AC_INIT(dspctl.c)
+-AM_INIT_AUTOMAKE(dspctl, 0.5)
+-
++AC_INIT(dspctl, 0.5)
+ AC_PROG_MAKE_SET
+ AC_PROG_CC
+ AC_LANG_C
++AM_INIT_AUTOMAKE
+ AC_PROG_INSTALL
+ 
+ if test "x$enable_debug" = "xyes"; then

@@ -1,0 +1,29 @@
+#!/sbin/runscript
+# Copyright 2009 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License, v2 or later
+# $Header$
+
+depend() {
+	need localmount
+        after bootmisc modules isapnp coldplug hotplug
+	before alsasound
+}
+
+start() {
+	ebegin "Initializing DSP"
+	if [ ! -f /var/run/dsp_mem_reserve ]; then
+		dspctl kmem_reserve 360000
+		touch /var/run/dsp_mem_reserve
+	fi
+	start-stop-daemon --start --quiet --background --make-pidfile \
+		--pidfile /var/run/dsp_dld.pid \
+		--exec /usr/sbin/dsp_dld \
+		-- -p --disable-restart -c /lib/dsp/dsp_dld_avs.conf
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping dsp_dld"
+	start-stop-daemon --stop --quiet --pidfile /var/run/dsp_dld.pid
+	eend $?
+}
