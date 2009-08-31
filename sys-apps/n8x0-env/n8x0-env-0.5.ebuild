@@ -4,15 +4,17 @@
 
 EAPI=2
 
-IUSE="alsa bluetooth cx3110x nokia-osso-linux gps stlc45xx wifi +wifi-calibrate X keyboard"
+IUSE="nokia-osso-linux alsa bluetooth gps stlc45xx wifi +wifi-calibrate X keyboard"
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 SLOT="0"
 KEYWORDS="~arm"
-RDEPEND="sys-apps/nit-bootmenu-compat
+RDEPEND="
+	sys-apps/nit-bootmenu-compat
+
 	nokia-osso-linux? (
-	sys-kernel/diablo-sources
+		sys-kernel/diablo-sources
 	)
 	bluetooth? (
 		net-wireless/nokia-n8x0-firmware[bluetooth]
@@ -22,14 +24,9 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 		sci-geosciences/gps5300driver
 	)
 	wifi? (
-		|| (
-			net-wireless/nokia-n8x0-firmware[wifi]
-			net-wireless/stlc4550-firmware
-		)
-		!stlc45xx? (
-			net-wireless/cx3110x
-		)
-		cx3110x? (
+		net-wireless/nokia-n8x0-firmware[wifi]
+		net-wireless/wireless-tools
+		nokia-osso-linux? (
 			net-wireless/cx3110x
 		)
 		stlc45xx? (
@@ -37,7 +34,6 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 				net-wireless/stlc45xx-cal
 			)
 		)
-		net-wireless/wireless-tools
 	)
 	keyboard? ( sys-apps/kbd[512keys] )
 	alsa? (
@@ -52,7 +48,8 @@ RDEPEND="sys-apps/nit-bootmenu-compat
 			x11-base/xorg-server[video_cards_fbdev]
 			x11-drivers/xf86-video-omapfb
 		)
-	)"
+	)
+"
 
 pkg_postinst() {
 	ewarn "If you're updating from <0.3 version of ${PN}, consider"

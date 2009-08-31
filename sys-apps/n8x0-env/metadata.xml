@@ -2,7 +2,6 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 <use>
-        <flag name='cx3110x'>Use cx3110x driver</flag>
         <flag name='stlc45xx'>Use stlc45xx driver</flag>
         <flag name='wifi-calibrate'>Calibrate WLAN driver</flag>
 </use>
