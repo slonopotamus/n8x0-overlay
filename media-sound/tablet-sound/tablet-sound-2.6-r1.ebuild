@@ -12,23 +12,23 @@ SLOT="0"
 LICENSE="BSD"
 DESCRIPTION="Metapackage that provides sound support on Nokia Internet Tablets"
 HOMEPAGE="http://wiki.maemo.org/Mer"
-IUSE=""
+IUSE="+udev"
 RDEPEND="
 	media-sound/alsa-utils
 	media-plugins/alsa-plugins[nokia-osso-linux]
 	media-sound/osso-dsp-loader
+	udev? ( sys-fs/udev )
 "
 
 # mermen can't properly package tarballs for some reason...
 S="${WORKDIR}/${PN}-2.4"
 
 src_install() {
-	insinto "/etc/udev/rules.d"
-	doins "51-sound.rules"
+	if use udev; then
+		insinto "/etc/udev/rules.d"
+		doins "51-sound.rules"
+	fi
 
 	insinto "/etc"
 	doins "asound.conf"
-
-	insinto "/var/lib/alsa/"
-	doins "asound.state"
 }
