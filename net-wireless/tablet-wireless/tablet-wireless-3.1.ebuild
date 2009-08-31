@@ -10,17 +10,14 @@ KEYWORDS="~arm"
 SLOT="0"
 LICENSE="BSD"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
-IUSE="cx3110x stlc45xx +wifi-calibrate"
+IUSE="nokia-osso-linux stlc45xx +wifi-calibrate"
 RDEPEND="
-	!stlc45xx? (
-		net-wireless/cx3110x
-	)
-	cx3110x? (
+	nokia-osso-linux? (
 		net-wireless/cx3110x
 	)
 	stlc45xx? (
 		wifi-calibrate? (
-		net-wireless/stlc45xx-cal
+			net-wireless/stlc45xx-cal
 		)
 	)
 "
