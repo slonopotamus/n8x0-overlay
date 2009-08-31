@@ -11,12 +11,8 @@ SLOT="0"
 LICENSE="GPL-2"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 IUSE="bluetooth wifi wimax"
-
-RDEPEND="
-	wifi? (
-		!net-wireless/stlc4560-firmware
-	)
-"
+RDEPEND=""
+DEPEND=""
 
 src_install() {
 	local ffl= ff
@@ -30,6 +26,7 @@ src_install() {
 		ffl="$ffl omap2420_pa.bin omap2420_pafmt.bin omap2420_papub.bin omap2420_wrap.bin"
 	fi
 	for ff in $ffl; do
+		# we're making an assumption that initfs is located at /mnt/initfs
 		dosym /mnt/initfs/usr/lib/hotplug/firmware/$ff /lib/firmware/$ff \
 		  || die "Error making link to $ff"
 	done
