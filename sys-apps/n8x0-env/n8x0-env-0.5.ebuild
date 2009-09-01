@@ -4,7 +4,7 @@
 
 EAPI=2
 
-IUSE="nokia-osso-linux alsa bluetooth gps stlc45xx wifi +wifi-calibrate X keyboard"
+IUSE="alsa bluetooth cx3110x gps nokia-osso-linux stlc45xx wifi +wifi-calibrate X keyboard"
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
@@ -24,8 +24,17 @@ RDEPEND="
 		sci-geosciences/gps5300driver
 	)
 	wifi? (
-		net-wireless/nokia-n8x0-firmware[wifi]
+		|| (
+			net-wireless/nokia-n8x0-firmware[wifi]
+			net-wireless/stlc4550-firmware
+		)
 		net-wireless/wireless-tools
+		!stlc45xx? (
+			net-wireless/cx3110x
+		)
+		cx3110x? (
+			net-wireless/cx3110x
+		)
 		nokia-osso-linux? (
 			net-wireless/cx3110x
 		)

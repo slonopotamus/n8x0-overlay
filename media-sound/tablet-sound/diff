@@ -1,0 +1,285 @@
+diff --git a/media-sound/tablet-sound/Manifest b/media-sound/tablet-sound/Manifest
+index 19bf438..9b949f7 100644
+--- a/media-sound/tablet-sound/Manifest
++++ b/media-sound/tablet-sound/Manifest
+@@ -1,3 +1,3 @@
+ DIST tablet-sound-2.6.tar.gz 3306 RMD160 43d37146ed244103ea36117df260c7296cae386e SHA1 46cdaa1c11324274b96c8c1f55ded2df9c25754b SHA256 254a27494444ca7d0abb8c9a3098d070488978822b2ada6f13e5be99336ffcd2
+-EBUILD tablet-sound-2.6.ebuild 720 RMD160 5a250093b89bb258ed5995998555fbc98da61410 SHA1 1bdba9200297c0cdec4b5f4b80cb46a95dc7b54c SHA256 a7e8c08741267beadb2c1f34dd5581e13748eeb64df9920860d6cfba6c0e51e0
++EBUILD tablet-sound-2.6-r1.ebuild 735 RMD160 8487dcfdd91fbfa0caf9688e9568978c78377807 SHA1 1fdf852afc9b1ff89b7090192071f25c6cd5f9df SHA256 48863b2e927cd15c06f3404bef5c72e3520fd405f6ed1cf8a6ff9da2e8a8c9d5
+ MISC metadata.xml 139 RMD160 c84b2b78f85074cc5c7d26cb757d91c8384fa16a SHA1 00e3ae2ead875413d94aeafa5279646740c2c21d SHA256 5cdc1888ebc8807b9a37b1d33429c61cabe7415a4f240e21a4c2ff8eca7a34ed
+diff --git a/media-sound/tablet-sound/tablet-sound-2.6.ebuild b/media-sound/tablet-sound/tablet-sound-2.6-r1.ebuild
+similarity index 78%
+rename from media-sound/tablet-sound/tablet-sound-2.6.ebuild
+rename to media-sound/tablet-sound/tablet-sound-2.6-r1.ebuild
+index 52b878b..1c0daec 100644
+--- a/media-sound/tablet-sound/tablet-sound-2.6.ebuild
++++ b/media-sound/tablet-sound/tablet-sound-2.6-r1.ebuild
+@@ -12,23 +12,23 @@ SLOT="0"
+ LICENSE="BSD"
+ DESCRIPTION="Metapackage that provides sound support on Nokia Internet Tablets"
+ HOMEPAGE="http://wiki.maemo.org/Mer"
+-IUSE=""
++IUSE="+udev"
+ RDEPEND="
+ 	media-sound/alsa-utils
+-	media-plugins/alsa-plugins[maemo]
++	media-plugins/alsa-plugins[nokia-osso-linux]
+ 	media-sound/osso-dsp-loader
++	udev? ( sys-fs/udev )
+ "
+ 
+ # mermen can't properly package tarballs for some reason...
+ S="${WORKDIR}/${PN}-2.4"
+ 
+ src_install() {
+-	insinto "/etc/udev/rules.d"
+-	doins "51-sound.rules"
++	if use udev; then
++		insinto "/etc/udev/rules.d"
++		doins "51-sound.rules"
++	fi
+ 
+ 	insinto "/etc"
+ 	doins "asound.conf"
+-
+-	insinto "/var/lib/alsa/"
+-	doins "asound.state"
+ }
+diff --git a/net-wireless/nokia-n8x0-firmware/Manifest b/net-wireless/nokia-n8x0-firmware/Manifest
+index a654ec5..6fe121b 100644
+--- a/net-wireless/nokia-n8x0-firmware/Manifest
++++ b/net-wireless/nokia-n8x0-firmware/Manifest
+@@ -1,2 +1,2 @@
+-EBUILD nokia-n8x0-firmware-0.3.ebuild 776 RMD160 57d90a705ed06294251cf812cc3bfb38387002ab SHA1 776fcef062ef70c796ee281009d51eb58bb12505 SHA256 3a99d6f72e0b79c666adca3a430f70396c719fd072601c9bbd14045e75065ae2
++EBUILD nokia-n8x0-firmware-0.3.1.ebuild 807 RMD160 91663a188066cfc054b80feaefe627935b9ec505 SHA1 a1b347cf15afcc6c9b5d80c6c805144bfbfdd7a4 SHA256 8a8309e944ca73a9ef039839a0d2526868e7a21392d8d4ce518fc347319fce9d
+ MISC metadata.xml 209 RMD160 91fcebaa5c9d63260814d58edc78d3d1eb15684f SHA1 ef433384eea5395f66ab459a9a253e8f9cfe7715 SHA256 cff5d896fec0433db822004b0c434bd1f167c727b5e022711914cb4ff5f0b80c
+diff --git a/net-wireless/nokia-n8x0-firmware/nokia-n8x0-firmware-0.3.ebuild b/net-wireless/nokia-n8x0-firmware/nokia-n8x0-firmware-0.3.1.ebuild
+similarity index 88%
+rename from net-wireless/nokia-n8x0-firmware/nokia-n8x0-firmware-0.3.ebuild
+rename to net-wireless/nokia-n8x0-firmware/nokia-n8x0-firmware-0.3.1.ebuild
+index e9741e8..7918295 100644
+--- a/net-wireless/nokia-n8x0-firmware/nokia-n8x0-firmware-0.3.ebuild
++++ b/net-wireless/nokia-n8x0-firmware/nokia-n8x0-firmware-0.3.1.ebuild
+@@ -11,12 +11,8 @@ SLOT="0"
+ LICENSE="GPL-2"
+ HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
+ IUSE="bluetooth wifi wimax"
+-
+-RDEPEND="
+-	wifi? (
+-		!net-wireless/stlc4560-firmware
+-	)
+-"
++RDEPEND=""
++DEPEND=""
+ 
+ src_install() {
+ 	local ffl= ff
+@@ -30,6 +26,7 @@ src_install() {
+ 		ffl="$ffl omap2420_pa.bin omap2420_pafmt.bin omap2420_papub.bin omap2420_wrap.bin"
+ 	fi
+ 	for ff in $ffl; do
++		# we're making an assumption that initfs is located at /mnt/initfs
+ 		dosym /mnt/initfs/usr/lib/hotplug/firmware/$ff /lib/firmware/$ff \
+ 		  || die "Error making link to $ff"
+ 	done
+diff --git a/net-wireless/stlc4560-firmware/Manifest b/net-wireless/stlc4560-firmware/Manifest
+deleted file mode 100644
+index 6271987..0000000
+--- a/net-wireless/stlc4560-firmware/Manifest
++++ /dev/null
+@@ -1,9 +0,0 @@
+-DIST 2.13.0.0.a.13.14.arm 30888 RMD160 a4882fd107496001f298fbb241c9b6fd34d04ec2 SHA1 e6879fcf45e433744f535ff4a260f447cb22519e SHA256 7fffaceb008b9beb5a1da4744c9a6d31c8d9eff54e3461cba925785f2ae1648d
+-DIST 2.13.0.0.a.22.0.arm 30828 RMD160 b27faa8447ab7a17ddfcf8c84dc8b8eb686c0054 SHA1 4f756c176a1426c14b62e0eb0336ad867a1343d9 SHA256 825229a0f29f51ff418b97f576b4e7f382e4d4c5947ce8e3f683d6bc173d6498
+-DIST 2.13.0.0.a.23.arm 26452 RMD160 f1c1bd78822546b53b3af0ea0ab1f239057c3c9e SHA1 3e8a3587378b2823604a5c819be90fc29aee1ff3 SHA256 41190913d11abf58ba947587ef1141b53165b4c796049638741be74122cab443
+-DIST 2.13.12.0.a.5.2.arm 26300 RMD160 8d18a98c6c183eaceffb81809b23332a1143ece4 SHA1 e1ac645632f2a669c54a75c7aaaecd6dd7004d30 SHA256 e73a6b14403b955b4462ab249a9c80f80c8280c773845f9465f3876ef1b5f362
+-EBUILD stlc4560-firmware-2.13.0.0.9910.13.14.ebuild 634 RMD160 18fc2db9307b3aab9ebba78082fd2fef1e080cf4 SHA1 e1df0f3e339a38c74d4d2a95c86a6ead5ac2e896 SHA256 75fccd8b4610368b0466465be3f6bb82c843203912b6a373c3adbc0e22cdd272
+-EBUILD stlc4560-firmware-2.13.0.0.9910.22.0.ebuild 634 RMD160 18fc2db9307b3aab9ebba78082fd2fef1e080cf4 SHA1 e1df0f3e339a38c74d4d2a95c86a6ead5ac2e896 SHA256 75fccd8b4610368b0466465be3f6bb82c843203912b6a373c3adbc0e22cdd272
+-EBUILD stlc4560-firmware-2.13.0.0.9910.23.ebuild 634 RMD160 18fc2db9307b3aab9ebba78082fd2fef1e080cf4 SHA1 e1df0f3e339a38c74d4d2a95c86a6ead5ac2e896 SHA256 75fccd8b4610368b0466465be3f6bb82c843203912b6a373c3adbc0e22cdd272
+-EBUILD stlc4560-firmware-2.13.12.0.9910.5.2.ebuild 634 RMD160 18fc2db9307b3aab9ebba78082fd2fef1e080cf4 SHA1 e1df0f3e339a38c74d4d2a95c86a6ead5ac2e896 SHA256 75fccd8b4610368b0466465be3f6bb82c843203912b6a373c3adbc0e22cdd272
+-MISC metadata.xml 139 RMD160 c84b2b78f85074cc5c7d26cb757d91c8384fa16a SHA1 00e3ae2ead875413d94aeafa5279646740c2c21d SHA256 5cdc1888ebc8807b9a37b1d33429c61cabe7415a4f240e21a4c2ff8eca7a34ed
+diff --git a/net-wireless/stlc4560-firmware/metadata.xml b/net-wireless/stlc4560-firmware/metadata.xml
+deleted file mode 100644
+index 097975e..0000000
+--- a/net-wireless/stlc4560-firmware/metadata.xml
++++ /dev/null
+@@ -1,4 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+-<pkgmetadata>
+-</pkgmetadata>
+diff --git a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.13.14.ebuild b/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.13.14.ebuild
+deleted file mode 120000
+index 0997535..0000000
+--- a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.13.14.ebuild
++++ /dev/null
+@@ -1 +0,0 @@
+-stlc4560-firmware-2.13.12.0.9910.5.2.ebuild
+\ No newline at end of file
+diff --git a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.22.0.ebuild b/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.22.0.ebuild
+deleted file mode 120000
+index 0997535..0000000
+--- a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.22.0.ebuild
++++ /dev/null
+@@ -1 +0,0 @@
+-stlc4560-firmware-2.13.12.0.9910.5.2.ebuild
+\ No newline at end of file
+diff --git a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.23.ebuild b/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.23.ebuild
+deleted file mode 120000
+index 0997535..0000000
+--- a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.0.0.9910.23.ebuild
++++ /dev/null
+@@ -1 +0,0 @@
+-stlc4560-firmware-2.13.12.0.9910.5.2.ebuild
+\ No newline at end of file
+diff --git a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.12.0.9910.5.2.ebuild b/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.12.0.9910.5.2.ebuild
+deleted file mode 100644
+index 3097408..0000000
+--- a/net-wireless/stlc4560-firmware/stlc4560-firmware-2.13.12.0.9910.5.2.ebuild
++++ /dev/null
+@@ -1,26 +0,0 @@
+-# Copyright 2009 Luke Dashjr <luke_n8x0_stlc4560-firmware@dashjr.org>
+-# Distributed under the terms of the GNU General Public License v2
+-# $Header$
+-
+-EAPI=2
+-
+-DESCRIPTION="binary firmware for stlc4560 wifi chip"
+-HOMEPAGE="http://daemonizer.de/prism54/prism54-fw/"
+-LICENSE="Copyright"
+-
+-SRC_URI="http://daemonizer.de/prism54/prism54-fw/${PN/-firmware/}/${PV/9910/a}.arm"
+-SLOT="0"
+-KEYWORDS="~arm"
+-IUSE=""
+-RESTRICT="mirror installsources bindist"
+-
+-DEPEND=''
+-RDEPEND="!net-wireless/nokia-n8x0-firmware[wifi]"
+-
+-S="${WORKDIR}"
+-
+-src_install() {
+-	insinto /lib/firmware/
+-	newins "${DISTDIR}/${A}" 3826.arm ||
+-		die "failed to install firmware"
+-}
+diff --git a/net-wireless/tablet-wireless/Manifest b/net-wireless/tablet-wireless/Manifest
+index bd2baf2..cafb9fa 100644
+--- a/net-wireless/tablet-wireless/Manifest
++++ b/net-wireless/tablet-wireless/Manifest
+@@ -1,3 +1,3 @@
+ AUX tablet-wireless.init 745 RMD160 7b969829d1155d099907a538dda9cad6615bac96 SHA1 78866ac99d70f2ef2ee2d181cbfc56e8b75b3666 SHA256 fd749092bc76542a40359aac6e29f0bb817b19d417792d8ae0c24e36821d6e58
+-EBUILD tablet-wireless-3.1.ebuild 615 RMD160 6876b6ff225d69bf73951ff072c26b3e76516a28 SHA1 b689ab576e3a5ed56c20307101732a79fd9f8c4b SHA256 585b2586e4d36aa0c871588e8b3a25166def746a0f949eb7764b0a701cc90294
++EBUILD tablet-wireless-3.1.ebuild 594 RMD160 43a09b697496937334453d4ad1295759594bbfbf SHA1 2c794cf168259cf98928bcf80e47ed03d0a651dd SHA256 249677af1ea39297a870123d8beb288b44a3f79c0fa773d8e5631bc22c117359
+ MISC metadata.xml 329 RMD160 ebf665daf6137dee7b6bd046f692e94c700cc786 SHA1 01afcd696fc98bd42a89ae612aeec1e5d9173710 SHA256 f29a01d691bc3037feaaf8bbcf910d98c4844bf519025634ac7fc0894400f2f4
+diff --git a/net-wireless/tablet-wireless/tablet-wireless-3.1.ebuild b/net-wireless/tablet-wireless/tablet-wireless-3.1.ebuild
+index 86d24aa..d3d634a 100644
+--- a/net-wireless/tablet-wireless/tablet-wireless-3.1.ebuild
++++ b/net-wireless/tablet-wireless/tablet-wireless-3.1.ebuild
+@@ -10,17 +10,14 @@ KEYWORDS="~arm"
+ SLOT="0"
+ LICENSE="BSD"
+ HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
+-IUSE="cx3110x stlc45xx +wifi-calibrate"
++IUSE="nokia-osso-linux stlc45xx +wifi-calibrate"
+ RDEPEND="
+-	!stlc45xx? (
+-		net-wireless/cx3110x
+-	)
+-	cx3110x? (
++	nokia-osso-linux? (
+ 		net-wireless/cx3110x
+ 	)
+ 	stlc45xx? (
+ 		wifi-calibrate? (
+-		net-wireless/stlc45xx-cal
++			net-wireless/stlc45xx-cal
+ 		)
+ 	)
+ "
+diff --git a/sys-apps/n8x0-env/Manifest b/sys-apps/n8x0-env/Manifest
+index b04400e..1c63612 100644
+--- a/sys-apps/n8x0-env/Manifest
++++ b/sys-apps/n8x0-env/Manifest
+@@ -1,2 +1,2 @@
+-EBUILD n8x0-env-0.4.1.ebuild 1569 RMD160 af16e11ac9b838c03e349eb8bc86ef9adf26ceb2 SHA1 ccc533f8c6b81e38c61eb5f7d7abb237434cf4dd SHA256 3b74b1c87317e3269cded16fe8525083a0ea745b29bef33b70669f318c8b1c2e
+-MISC metadata.xml 329 RMD160 ebf665daf6137dee7b6bd046f692e94c700cc786 SHA1 01afcd696fc98bd42a89ae612aeec1e5d9173710 SHA256 f29a01d691bc3037feaaf8bbcf910d98c4844bf519025634ac7fc0894400f2f4
++EBUILD n8x0-env-0.5.ebuild 1486 RMD160 c827a1b9a0c87edb2b65ba2547b4b2898946215d SHA1 940f152f53f2f24c6328f720a54fcd4cdb21710a SHA256 3982ef5886a51163a3a6708855b296cb947c1224c64ca7afe1317d3920ac25ed
++MISC metadata.xml 274 RMD160 5025bc219f1d9a556420c9ff1f4a91447e127d26 SHA1 7a2e07f259b6dfca9b0ebcea23c796fbef83b7cf SHA256 7feb324863641638a2e4fc47d0218f850a1f568cc7fe42c3a8cd66521d8bf0c6
+diff --git a/sys-apps/n8x0-env/metadata.xml b/sys-apps/n8x0-env/metadata.xml
+index 1006c31..713e0f1 100644
+--- a/sys-apps/n8x0-env/metadata.xml
++++ b/sys-apps/n8x0-env/metadata.xml
+@@ -2,7 +2,6 @@
+ <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+ <pkgmetadata>
+ <use>
+-        <flag name='cx3110x'>Use cx3110x driver</flag>
+         <flag name='stlc45xx'>Use stlc45xx driver</flag>
+         <flag name='wifi-calibrate'>Calibrate WLAN driver</flag>
+ </use>
+diff --git a/sys-apps/n8x0-env/n8x0-env-0.4.1.ebuild b/sys-apps/n8x0-env/n8x0-env-0.5.ebuild
+similarity index 80%
+rename from sys-apps/n8x0-env/n8x0-env-0.4.1.ebuild
+rename to sys-apps/n8x0-env/n8x0-env-0.5.ebuild
+index 6d40bf8..1b6d307 100644
+--- a/sys-apps/n8x0-env/n8x0-env-0.4.1.ebuild
++++ b/sys-apps/n8x0-env/n8x0-env-0.5.ebuild
+@@ -4,15 +4,17 @@
+ 
+ EAPI=2
+ 
+-IUSE="alsa bluetooth cx3110x nokia-osso-linux gps stlc45xx wifi +wifi-calibrate X keyboard"
++IUSE="nokia-osso-linux alsa bluetooth gps stlc45xx wifi +wifi-calibrate X keyboard"
+ LICENSE="GPL-2"
+ DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
+ HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
+ SLOT="0"
+ KEYWORDS="~arm"
+-RDEPEND="sys-apps/nit-bootmenu-compat
++RDEPEND="
++	sys-apps/nit-bootmenu-compat
++
+ 	nokia-osso-linux? (
+-	sys-kernel/diablo-sources
++		sys-kernel/diablo-sources
+ 	)
+ 	bluetooth? (
+ 		net-wireless/nokia-n8x0-firmware[bluetooth]
+@@ -22,14 +24,9 @@ RDEPEND="sys-apps/nit-bootmenu-compat
+ 		sci-geosciences/gps5300driver
+ 	)
+ 	wifi? (
+-		|| (
+-			net-wireless/nokia-n8x0-firmware[wifi]
+-			net-wireless/stlc4550-firmware
+-		)
+-		!stlc45xx? (
+-			net-wireless/cx3110x
+-		)
+-		cx3110x? (
++		net-wireless/nokia-n8x0-firmware[wifi]
++		net-wireless/wireless-tools
++		nokia-osso-linux? (
+ 			net-wireless/cx3110x
+ 		)
+ 		stlc45xx? (
+@@ -37,7 +34,6 @@ RDEPEND="sys-apps/nit-bootmenu-compat
+ 				net-wireless/stlc45xx-cal
+ 			)
+ 		)
+-		net-wireless/wireless-tools
+ 	)
+ 	keyboard? ( sys-apps/kbd[512keys] )
+ 	alsa? (
+@@ -52,7 +48,8 @@ RDEPEND="sys-apps/nit-bootmenu-compat
+ 			x11-base/xorg-server[video_cards_fbdev]
+ 			x11-drivers/xf86-video-omapfb
+ 		)
+-	)"
++	)
++"
+ 
+ pkg_postinst() {
+ 	ewarn "If you're updating from <0.3 version of ${PN}, consider"
