@@ -52,9 +52,14 @@ RDEPEND="
 	)
 	X? (
 		x11-misc/nokia-tablets-pointercal
-		x11-base/xorg-server[tslib,xorg,input_devices_evdev,input_devices_tslib]
+		x11-base/xorg-server[tslib,xorg]
+		|| (
+			x11-base/xorg-server[input_devices_evdev,input_devices_tslib]
+			x11-base/xorg-drivers[input_devices_evdev,input_devices_tslib]
+		)
 		|| (
 			x11-base/xorg-server[video_cards_fbdev]
+			x11-base/xorg-drivers[video_cards_fbdev]
 			x11-drivers/xf86-video-omapfb
 		)
 	)
