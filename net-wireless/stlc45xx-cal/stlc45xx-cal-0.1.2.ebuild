@@ -13,7 +13,7 @@ LICENSE="stlc45xx-cal"
 HOMEPAGE="http://tablets-dev.nokia.com/"
 
 SLOT="0"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 IUSE="+udev"
 
 DEPEND=""
