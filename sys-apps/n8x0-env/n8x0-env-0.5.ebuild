@@ -18,7 +18,10 @@ RDEPEND="
 	)
 	bluetooth? (
 		net-wireless/nokia-n8x0-firmware[bluetooth]
-		net-wireless/bluez-utils
+		|| (
+			net-wireless/bluez
+			net-wireless/bluez-utils
+		)
 	)
 	gps? (
 		sci-geosciences/gps5300driver
