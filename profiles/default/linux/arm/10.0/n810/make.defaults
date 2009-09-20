@@ -1,1 +1,1 @@
-USE="${USE} 512keys gps keyboard"
+USE="${USE} gps keyboard"
