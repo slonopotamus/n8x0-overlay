@@ -13,6 +13,6 @@ LDFLAGS="${LDFLAGS} -Wl,--reduce-memory-overheads"
 LDFLAGS="${LDFLAGS} -Wl,-O1"
 LDFLAGS="${LDFLAGS} -Wl,-S"
 
-USE="${USE} alsa bluetooth -fortran v4l2 wifi X"
+USE="${USE} alsa bluetooth -fortran tslib v4l2 wifi X"
 VIDEO_CARDS='omapfb fbdev'
 INPUT_DEVICES='evdev keyboard tslib'
