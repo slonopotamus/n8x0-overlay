@@ -1,0 +1,3 @@
+# Enable git for layman per default, since n8x0 overlay is git...
+app-portage/layman git
+
