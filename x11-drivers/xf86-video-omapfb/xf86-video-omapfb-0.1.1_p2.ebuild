@@ -16,7 +16,7 @@ SRC_URI="
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${MY_PFN}
 "
 DESCRIPTION="OMAP framebuffer video driver"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 RDEPEND="x11-base/xorg-server"
 DEPEND="${RDEPEND}
 	x11-proto/renderproto"
