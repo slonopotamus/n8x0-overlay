@@ -18,7 +18,7 @@ HOMEPAGE="http://www.maemo.org"
 SRC_URI="${SRC_DIR}/${MY_P}.orig.tar.gz
 	${SRC_DIR}/${MY_PATCH}"
 
-KEYWORDS="~arm"
+KEYWORDS="arm"
 IUSE=""
 
 src_unpack() {
