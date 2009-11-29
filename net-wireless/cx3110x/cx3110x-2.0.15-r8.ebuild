@@ -56,6 +56,7 @@ src_prepare() {
 	epatch "${FILESDIR}/no-config.h-fix.patch"
 	epatch "${FILESDIR}/notfix.patch"
 	use we-18 && epatch "${DISTDIR}/${WPA_PATCH}"
+	epatch "${FILESDIR}/qemu-make-pwd-fix.patch"
 }
 
 src_install() {

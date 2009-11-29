@@ -1,0 +1,18 @@
+--- src/Makefile.orig	2009-11-29 21:19:17.000000000 +0000
++++ src/Makefile	2009-11-29 21:18:40.000000000 +0000
+@@ -1,6 +1,6 @@
+ ifeq ($(KERNELRELEASE),)
+ STRIP = $(CROSS_COMPILE)strip
+-PWD := $(shell pwd)
++export MYPWD := $(shell pwd)
+ 
+ .PHONY: modules clean
+ 
+@@ -16,6 +16,6 @@
+ 
+ else
+ 
+-include $(PWD)/Makefile.k26
++include $(MYPWD)/Makefile.k26
+ 
+ endif # ifeq ($(KERNELRELEASE),)
