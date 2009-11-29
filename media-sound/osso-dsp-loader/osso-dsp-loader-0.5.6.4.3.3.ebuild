@@ -8,7 +8,7 @@ inherit eutils autotools versionator
 
 MY_P="${PN}_$(replace_version_separator 3 '-' $(get_version_component_range 1-4))"
 SRC_URI="http://repository.maemo.org/pool/maemo4.1/free/o/${PN}/${MY_P}.tar.gz"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 SLOT="0"
 LICENSE="GPL-2"
 DESCRIPTION="DSP loader for OSSO Multimedia framework"

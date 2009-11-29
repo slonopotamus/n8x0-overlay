@@ -4,7 +4,7 @@
 
 uPN="${PN}-rx-44"
 SRC_URI="mirror://n8x0/updates/diablo/${uPN}_${PV}_all.deb"
-KEYWORDS="-* ~arm"
+KEYWORDS="-* arm"
 SLOT="0"
 LICENSE="CopyrightNokia"
 DESCRIPTION="DSP modules for OSSO Multimedia framework"

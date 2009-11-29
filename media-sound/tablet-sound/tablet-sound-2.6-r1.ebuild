@@ -7,7 +7,7 @@ EAPI=2
 inherit eutils
 
 SRC_URI="http://slonopotamus.org/_media/gentoo-on-n8x0/${P}.tar.gz"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 SLOT="0"
 LICENSE="BSD"
 DESCRIPTION="Metapackage that provides sound support on Nokia Internet Tablets"

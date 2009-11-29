@@ -23,7 +23,7 @@ LICENSE="GPL-2"
 HOMEPAGE="http://www.maemo.org"
 
 SLOT="0"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 IUSE="debug +udev +we-18"
 
 DEPEND="virtual/linux-sources"

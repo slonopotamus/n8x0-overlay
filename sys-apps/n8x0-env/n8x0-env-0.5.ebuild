@@ -9,7 +9,7 @@ LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 SLOT="0"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 RDEPEND="
 	sys-apps/nit-bootmenu-compat
 
