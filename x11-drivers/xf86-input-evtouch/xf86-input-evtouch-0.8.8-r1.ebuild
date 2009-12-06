@@ -15,7 +15,7 @@ DESCRIPTION="Input driver for Linux event touchscreens"
 HOMEPAGE="http://www.conan.de/touchscreen/evtouch.html"
 SRC_URI="
 	http://www.conan.de/touchscreen/${P}.tar.bz2
-	http://ftp.de.debian.org/debian/pool/main/x/${PN}/${MYPATCH}.gz
+	mirror://debian/pool/main/x/${PN}/${MYPATCH}.gz
 "
 
 LICENSE="GPL-2"

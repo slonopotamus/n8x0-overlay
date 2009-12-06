@@ -11,7 +11,7 @@ SRC_URI="
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${PN}1_${PV}_armel.deb
 "
 SLOT="1"
-KEYWORDS="-* ~arm"
+KEYWORDS="-* arm"
 IUSE=""
 
 DEPEND=''
