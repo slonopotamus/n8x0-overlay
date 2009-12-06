@@ -14,9 +14,12 @@ LICENSE="GPL-2"
 DESCRIPTION="DSP loader for OSSO Multimedia framework"
 HOMEPAGE="http://maemo.org/"
 IUSE=""
+RDEPEND="
+        media-sound/osso-dsp-modules
+"
 DEPEND="
 	sys-devel/automake:1.7
-	media-sound/osso-dsp-modules
+	${RDEPEND}
 "
 
 S="${WORKDIR}/${PN}-$(get_version_component_range 1-3)"

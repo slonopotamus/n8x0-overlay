@@ -2,14 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/x11-drivers/xf86-input-evtouch/xf86-input-evtouch-0.8.7.ebuild,v 1.3 2008/02/21 22:52:41 cardoe Exp $
 
+EAPI=2
+
 SNAPSHOT="yes"
 XDPVER=-1
 
-inherit x-modular autotools
+inherit x-modular
+
+MYPATCH="${PN}_${PV}-1.diff"
 
 DESCRIPTION="Input driver for Linux event touchscreens"
 HOMEPAGE="http://www.conan.de/touchscreen/evtouch.html"
-SRC_URI="http://www.conan.de/touchscreen/${P}.tar.bz2"
+SRC_URI="
+	http://www.conan.de/touchscreen/${P}.tar.bz2
+	http://ftp.de.debian.org/debian/pool/main/x/${PN}/${MYPATCH}.gz
+"
 
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~arm ~x86"
@@ -25,6 +32,16 @@ DEPEND="${RDEPEND}
 PATCHES=("${FILESDIR}/${PN}-evcalibrate-path.patch")
 CONFIGURE_OPTIONS="--enable-evcalibrate --enable-udevinstall"
 DOCS="README README.calibration TODO"
+
+src_prepare() {
+	EPATCH_OPTS="-p1" epatch "${WORKDIR}/${MYPATCH}"
+
+	epatch "${S}/debian/patches/01_fix_warnings.patch"
+	epatch "${S}/debian/patches/02_calibration_1.6.patch"
+	epatch "${S}/debian/patches/03_server-1.6-ftbfs.diff"
+
+	x-modular_src_prepare
+}
 
 pkg_postinst() {
 	einfo
