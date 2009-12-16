@@ -1,5 +1,5 @@
 DESCRIPTION="Console keymap modifier for Nokia N810"
-HOMEPAGE=""
+HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 LICENSE="as-is"
 
 SRC_URI=""

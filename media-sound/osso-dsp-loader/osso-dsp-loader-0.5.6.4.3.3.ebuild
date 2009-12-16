@@ -15,7 +15,7 @@ DESCRIPTION="DSP loader for OSSO Multimedia framework"
 HOMEPAGE="http://maemo.org/"
 IUSE=""
 RDEPEND="
-        media-sound/osso-dsp-modules
+	media-sound/osso-dsp-modules
 "
 DEPEND="
 	sys-devel/automake:1.7

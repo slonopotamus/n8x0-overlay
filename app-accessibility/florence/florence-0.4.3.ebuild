@@ -10,7 +10,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 DESCRIPTION="Extensible scalable virtual keyboard for GNOME"
 KEYWORDS="arm"
 SLOT="0"
-IUSE="doc +notify +xtst +xkb"
+IUSE="doc +notify +xtst"
 LICENSE="GPL-2"
 HOMEPAGE="http://florence.sourceforge.net/"
 
@@ -33,7 +33,7 @@ DOCS="AUTHORS ChangeLog NEWS README"
 
 src_configure() {
 	econf $(use_with doc docs) \
-	  $(use_with xkb) \
 	  $(use_with notify notification) \
-	  $(use_with xtst)
+	  $(use_with xtst) \
+	  --with-xkb
 }
