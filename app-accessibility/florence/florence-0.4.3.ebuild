@@ -8,7 +8,7 @@ inherit gnome2
 
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 DESCRIPTION="Extensible scalable virtual keyboard for GNOME"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 SLOT="0"
 IUSE="doc +notify +xtst +xkb"
 LICENSE="GPL-2"
