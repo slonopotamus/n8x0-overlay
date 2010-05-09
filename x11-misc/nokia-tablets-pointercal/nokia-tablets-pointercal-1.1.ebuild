@@ -4,10 +4,7 @@
 
 inherit eutils
 
-SRC_URI="
-	http://repository.mer.tspre.org/pool/main/n/${PN}/${PN}_${PV}.tar.gz
-	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${PN}_${PV}.tar.gz
-"
+SRC_URI="http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${PN}_${PV}.tar.gz"
 KEYWORDS="arm"
 SLOT="0"
 IUSE=""
