@@ -1,0 +1,18 @@
+# /etc/conf.d/gps5300driver
+
+# The user who can control the driver
+GPS5300_USER=root
+
+# Whether the driver will self-initialize
+GPS5300_SELFINIT=true
+
+# Priority of the driver
+GPS5300_NICE=-10
+
+# Commands to control GPIO
+GPS5300_CMD_INIT='echo 12 > /sys/class/gpio/export; echo 95 > /sys/class/gpio/export; echo out > /sys/class/gpio/gpio12/direction; echo out > /sys/class/gpio/gpio95/direction'
+GPS5300_CMD_ACTIVATE_RESET='echo 1 > /sys/class/gpio/gpio12/value'
+GPS5300_CMD_DEACTIVATE_RESET='echo 0 > /sys/class/gpio/gpio12/value'
+GPS5300_CMD_ACTIVATE_WAKEUP='echo 1 > /sys/class/gpio/gpio95/value'
+GPS5300_CMD_DEACTIVATE_WAKEUP='echo 0 > /sys/class/gpio/gpio95/value'
+GPS5300_CMD_QUIT='echo 12 > /sys/class/gpio/unexport; echo 95 > /sys/class/gpio/unexport'

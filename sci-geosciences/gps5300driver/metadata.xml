@@ -2,6 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 <use>
+        <flag name='custom-gpio'>Enables support for customizing GPIO access (needed for non-Diablo kernels)</flag>
         <flag name='gconf'>Enables support for storing/loading GPS and A-GPS information via gconf</flag>
 </use>
 </pkgmetadata>

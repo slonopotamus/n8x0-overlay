@@ -1,0 +1,57 @@
+#!/sbin/runscript
+# Copyright 2009 Luke Dashjr <luke_n8x0_gps5300driver@dashjr.org>
+# Licensed for redistribution as-is;
+# contact me if you want something more permissive
+
+GPS5300_DRIVER='/usr/sbin/gps5300driver'
+GPS5300_PIDFILE='/var/run/gps5300driver.pid'
+GPS5300_PRELOAD='/usr/lib/libgps5300faker.so'
+
+depend() {
+	need dbus
+	before gpsd
+}
+
+start() {
+	ebegin "Starting GPS5300 driver"
+	if [ -e /sys/devices/platform/gpio-switch/gps_reset/state ]; then
+		unset GPS5300_CMD_{INIT,QUIT,{,DE}ACTIVATE_{RESET,WAKEUP}}
+	else
+		if [ -z "${GPS5300_CMD_ACTIVATE_RESET}" ]; then
+			eend 1 'gps_reset state gpio switch missing; you need to set GPS5300_CMD_{,DE}ACTIVATE_{RESET,WAKEUP}'
+			return
+		fi
+		export GPS5300_CMD_{,DE}ACTIVATE_{RESET,WAKEUP}
+	fi
+	
+	[ -z "${GPS5300_SELFINIT}" ] && GPS5300_SELFINIT=true
+	${GPS5300_SELFINIT} || unset GPS5300_SELFINIT
+	export GPS5300_SELFINIT
+	
+	[ -z "${GPS5300_USER}" ] && GPS5300_USER=root
+	export GPS5300_USER
+	
+	[ -z "${GPS5300_NICE}" ] && GPS5300_NICE=0
+	
+	[ -z "${GPS5300_CMD_INIT}" ] || eval "${GPS5300_CMD_INIT}"
+	
+	start-stop-daemon --start \
+		--quiet \
+		--background \
+		--pidfile "${GPS5300_PIDFILE}" \
+		--make-pidfile \
+		--env "LD_PRELOAD=${GPS5300_PRELOAD}" \
+		--nicelevel "${GPS5300_NICE}" \
+		--exec "${GPS5300_DRIVER}"
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping GPS5300 driver"
+	start-stop-daemon --stop \
+		--quiet \
+		--pidfile "${GPS5300_PIDFILE}"
+	rv="$?"
+	[ -z "${GPS5300_CMD_QUIT}" ] || eval "${GPS5300_CMD_QUIT}"
+	eend $rv
+}
