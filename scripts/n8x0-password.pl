@@ -18,15 +18,14 @@ $p{Hardware} = sub {
 	$v =~ m/^(\w+)\s(.*)$/;
 	my ($Brand, $Model) = ($1, $2);
 	$Brand = uc $Brand;
-	$Model = 'RX-34' if $Model eq 'N800';
+	$Model =~ s/^N8([01])0$/'RX-'.($1+3).'4'/e;
 	$user = "${Brand}-${user}-$Model";
-};
-$p{"Cache format"} = sub {
-	substr($pass, 3, 1) = substr($v, 0, 1);
 };
 $p{Features} = sub {
 	my @f = split /\s/, $v;
+	my $c;
 	for (@f) {
+		substr($pass, 3, 1) = substr(uc, 0, 1) if 2 == ++$c;
 		next unless length == 8;
 		substr($pass, 4, 1) = uc substr($_, 5, 1);
 		return;
