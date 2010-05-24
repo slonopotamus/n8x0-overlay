@@ -1,7 +1,4 @@
 CHOST="arm-gentoo-linux-gnueabi"
-ARCH=arm
-
-ACCEPT_KEYWORDS="arm"
 
 MARCH_TUNE="-march=armv6j -mtune=arm1136jf-s -mfpu=vfp"
 CFLAGS="-Os -pipe ${MARCH_TUNE} -fomit-frame-pointer"
@@ -13,6 +10,6 @@ LDFLAGS="${LDFLAGS} -Wl,--reduce-memory-overheads"
 LDFLAGS="${LDFLAGS} -Wl,-O1"
 LDFLAGS="${LDFLAGS} -Wl,-S"
 
-USE="${USE} alsa bluetooth -fortran tslib v4l2 wifi X"
-VIDEO_CARDS='omapfb fbdev'
-INPUT_DEVICES='evdev keyboard tslib'
+USE="${USE} alsa bluetooth -fortran tslib v4l2 wifi X kdrive"
+VIDEO_CARDS="omapfb fbdev"
+INPUT_DEVICES="evdev keyboard tslib"
