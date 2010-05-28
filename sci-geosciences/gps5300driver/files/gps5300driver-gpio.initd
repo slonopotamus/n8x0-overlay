@@ -47,6 +47,9 @@ start() {
 }
 
 stop() {
+	if [ -e /sys/devices/platform/gpio-switch/gps_reset/state ]; then
+		unset GPS5300_CMD_QUIT
+	fi
 	ebegin "Stopping GPS5300 driver"
 	start-stop-daemon --stop \
 		--quiet \
