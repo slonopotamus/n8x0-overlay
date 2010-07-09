@@ -1,0 +1,12 @@
+diff -ur gst-plugins-dsp0.10-1.11.36~diablo2.orig/configure.in gst-plugins-dsp0.10-1.11.36~diablo2/configure.in
+--- gst-plugins-dsp0.10-1.11.36~diablo2.orig/configure.in	2010-05-25 19:17:52.000000000 +0400
++++ gst-plugins-dsp0.10-1.11.36~diablo2/configure.in	2010-05-25 22:00:40.000000000 +0400
+@@ -67,7 +67,7 @@
+ plugindir="\$(libdir)/gstreamer-0.10"
+ AC_SUBST(plugindir)
+ 
+-GST_CFLAGS="-I\$(top_srcdir)/include -Werror $GST_CFLAGS $GST_ERROR $DEBUG_FLAGS"
++GST_CFLAGS="-I\$(top_srcdir)/include $GST_CFLAGS $GST_ERROR $DEBUG_FLAGS"
+ GST_PLUGIN_LDFLAGS='-module -avoid-version -export-symbols-regex [_]*\(gst_\|Gst\|GST_\).*'
+ 
+ AC_SUBST(GST_LIBS)

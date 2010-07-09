@@ -12,11 +12,12 @@ SLOT="0"
 LICENSE="BSD"
 DESCRIPTION="Metapackage that provides sound support on Nokia Internet Tablets"
 HOMEPAGE="http://wiki.maemo.org/Mer"
-IUSE="+udev"
+IUSE="+udev gstreamer"
 RDEPEND="
 	media-sound/alsa-utils
 	media-plugins/alsa-plugins[nokia-osso-linux]
 	media-sound/osso-dsp-loader
+	gstreamer? ( media-plugins/gst-plugins-dsp )
 	udev? ( sys-fs/udev )
 "
 
