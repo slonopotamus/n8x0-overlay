@@ -27,3 +27,7 @@ src_prepare() {
 	epatch "${FILESDIR}/disable-werror.patch"
 	eautoreconf
 }
+
+src_install() {
+	emake install DESTDIR="${D}"
+}
