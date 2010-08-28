@@ -1,14 +1,9 @@
 CHOST="arm-gentoo-linux-gnueabi"
 
 MARCH_TUNE="-march=armv6j -mtune=arm1136jf-s -mfpu=vfp"
-CFLAGS="-Os -pipe ${MARCH_TUNE} -fomit-frame-pointer"
-CFLAGS="${CFLAGS} --param ggc-min-expand=0 --param ggc-min-heapsize=32768"
+# -Os was replaced with -O2 since -Os caused too many stuff to break
+CFLAGS="-O2 -pipe ${MARCH_TUNE} -fomit-frame-pointer"
 CXXFLAGS="${CFLAGS}"
-
-LDFLAGS="${LDFLAGS} -Wl,--no-keep-memory"
-LDFLAGS="${LDFLAGS} -Wl,--reduce-memory-overheads"
-LDFLAGS="${LDFLAGS} -Wl,-O1"
-LDFLAGS="${LDFLAGS} -Wl,-S"
 
 USE="${USE} alsa bluetooth -fortran tslib v4l2 wifi X kdrive"
 VIDEO_CARDS="omapfb fbdev"
