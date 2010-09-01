@@ -5,6 +5,6 @@ MARCH_TUNE="-march=armv6j -mtune=arm1136jf-s -mfpu=vfp"
 CFLAGS="-O2 -pipe ${MARCH_TUNE} -fomit-frame-pointer"
 CXXFLAGS="${CFLAGS}"
 
-USE="${USE} alsa bluetooth -fortran tslib v4l2 wifi X kdrive"
+USE="${USE} alsa bluetooth -fortran tslib v4l2 wifi X"
 VIDEO_CARDS="omapfb fbdev"
 INPUT_DEVICES="evdev keyboard tslib"
