@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/sys-apps/kbd/kbd-1.15.ebuild,v 1.16 2010/01/24 18:24:19 armin76 Exp $
 
+EAPI=2
+
 inherit eutils
 
 DESCRIPTION="Keyboard and console utilities"
@@ -27,9 +29,8 @@ src_unpack() {
 	use 512keys && epatch "${FILESDIR}/${PN}-1.13-512keys.patch"
 }
 
-src_compile() {
+src_configure() {
 	econf $(use_enable nls) || die
-	emake || die
 }
 
 src_install() {
