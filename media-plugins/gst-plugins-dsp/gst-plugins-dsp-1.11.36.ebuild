@@ -12,6 +12,7 @@ MY_PV="${PV}~diablo2"
 SLOT="0"
 SRC_URI="http://repository.maemo.org/pool/diablo/free/g/${MY_PN}/${MY_PN}_${MY_PV}.tar.gz"
 DESCRIPTION="GStreamer plugin to output sound to OMAP DSP"
+LICENSE="GPL-2"
 KEYWORDS="~arm"
 IUSE=""
 
