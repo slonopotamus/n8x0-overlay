@@ -1,8 +1,6 @@
-# Copyright 1999-2009 Gentoo Foundation
+# Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header$
-
-EAPI=2
+# $Header: /var/cvsroot/gentoo-x86/sys-apps/kbd/kbd-1.15.ebuild,v 1.16 2010/01/24 18:24:19 armin76 Exp $
 
 inherit eutils
 
@@ -12,7 +10,7 @@ SRC_URI="ftp://ftp.altlinux.org/pub/people/legion/kbd/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="alpha amd64 arm hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86"
 IUSE="+512keys nls"
 
 RDEPEND=""
@@ -29,8 +27,9 @@ src_unpack() {
 	use 512keys && epatch "${FILESDIR}/${PN}-1.13-512keys.patch"
 }
 
-src_configure() {
+src_compile() {
 	econf $(use_enable nls) || die
+	emake || die
 }
 
 src_install() {
