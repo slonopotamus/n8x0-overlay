@@ -15,11 +15,15 @@ SRC_URI="
 	mirror://ubuntu/pool/universe/x/${PN}/${MY_PFN}
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${MY_PFN}
 "
-DESCRIPTION="OMAP framebuffer video driver"
+DESCRIPTION="X.Org driver for TI OMAP framebuffers"
 KEYWORDS="arm"
 RDEPEND="x11-base/xorg-server"
 DEPEND="${RDEPEND}
 	x11-proto/renderproto"
 S="${WORKDIR}/${P/_p*/}"
-IUSE=""
+IUSE="neon"
 LICENSE="as-is"
+
+pkg_setup() {
+	CONFIGURE_OPTIONS="$(use_enable neon)"
+}
