@@ -12,20 +12,20 @@ SLOT="0"
 KEYWORDS="arm"
 RDEPEND="
 	sys-apps/nit-bootmenu-compat
+	gps? ( sci-geosciences/gps5300driver )
+	keyboard? ( sys-apps/kbd[512keys] )
 
 	nokia-osso-linux? (
 		sys-kernel/diablo-sources
+
+		alsa? ( media-sound/tablet-sound )
 	)
+
 	bluetooth? (
 		net-wireless/nokia-n8x0-firmware[bluetooth]
-		|| (
-			net-wireless/bluez
-			net-wireless/bluez-utils
-		)
+		net-wireless/bluez
 	)
-	gps? (
-		sci-geosciences/gps5300driver
-	)
+
 	wifi? (
 		|| (
 			net-wireless/nokia-n8x0-firmware[wifi]
@@ -47,21 +47,13 @@ RDEPEND="
 			)
 		)
 	)
-	keyboard? ( sys-apps/kbd[512keys] )
-	alsa? (
-		nokia-osso-linux? (
-			media-sound/tablet-sound
-		)
-	)
+
 	X? (
 		x11-misc/nokia-tablets-pointercal
 		x11-base/xorg-server[tslib,xorg]
+		x11-base/xorg-drivers[input_devices_evdev,input_devices_tslib]
+
 		|| (
-			x11-base/xorg-server[input_devices_evdev,input_devices_tslib]
-			x11-base/xorg-drivers[input_devices_evdev,input_devices_tslib]
-		)
-		|| (
-			x11-base/xorg-server[video_cards_fbdev]
 			x11-base/xorg-drivers[video_cards_fbdev]
 			x11-drivers/xf86-video-omapfb
 		)
