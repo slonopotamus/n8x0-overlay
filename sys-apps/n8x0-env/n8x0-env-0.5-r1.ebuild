@@ -54,19 +54,8 @@ RDEPEND="
 		x11-base/xorg-drivers[input_devices_evdev,input_devices_tslib]
 
 		|| (
-			x11-base/xorg-drivers[video_cards_fbdev]
 			x11-drivers/xf86-video-omapfb
+			x11-base/xorg-drivers[video_cards_fbdev]
 		)
 	)
 "
-
-pkg_postinst() {
-	ewarn "If you're updating from <0.3 version of ${PN}, consider"
-	ewarn "updating your 'Device' section in /etc/X11/xorg.conf because"
-	ewarn "we found xf86-video-fbdev is better than xf86-video-omapfb"
-	echo
-	ewarn 'Section "Device"'
-	ewarn '  Identifier      "device"'
-	ewarn '  Driver          "fbdev"'
-	ewarn 'EndSection'
-}
