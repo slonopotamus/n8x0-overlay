@@ -1,1 +1,5 @@
+# doesn't work with diablo kernel
 >=sys-fs/udev-145
+
+# requires newer udev
+>=net-wireless/bluez-4.69
