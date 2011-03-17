@@ -35,9 +35,9 @@ pkg_postinst() {
 	einfo "by running: rc-update add nit-boot-basics boot"
 
 	# Can't install a .keep here, since it's read-only
-	mkdir --mode=000 -p /mnt/initfs
+	mkdir --mode=000 -p "${ROOT}/mnt/initfs"
 }
 
 pkg_postrm() {
-	ewarn "/mnt/initfs has NOT been removed"
+	ewarn "'${ROOT}/mnt/initfs' has NOT been removed"
 }
