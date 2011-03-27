@@ -54,7 +54,7 @@ RDEPEND="
 		x11-base/xorg-drivers[input_devices_evdev,input_devices_tslib]
 
 		|| (
-			x11-drivers/xf86-video-omapfb
+			x11-base/xorg-drivers[video_cards_omapfb]
 			x11-base/xorg-drivers[video_cards_fbdev]
 		)
 	)
