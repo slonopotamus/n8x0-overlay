@@ -9,7 +9,7 @@ inherit eutils
 KEYWORDS="~arm"
 SLOT="0"
 LICENSE="BSD"
-HOMEPAGE="http://github.com/slonopotamus/n8x0-overlay"
+HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 IUSE="cx3110x nokia-osso-linux stlc45xx +wifi-calibrate"
 RDEPEND="
 	cx3110x? (

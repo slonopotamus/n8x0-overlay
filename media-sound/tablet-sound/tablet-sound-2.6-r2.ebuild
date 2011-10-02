@@ -6,7 +6,7 @@ EAPI=2
 
 inherit eutils
 
-SRC_URI="http://github.com/downloads/slonopotamus/n8x0-overlay/${P}.tar.gz"
+SRC_URI="http://slonopotamus.org/_media/gentoo-on-n8x0/${P}.tar.gz"
 KEYWORDS="arm"
 SLOT="0"
 LICENSE="BSD"
