@@ -10,17 +10,11 @@ LICENSE="GPL-2"
 
 SLOT='0'
 KEYWORDS='arm'
-SRC_URI="
-	http://bowman.infotech.monash.edu.au/~pmoulder/${PN}.c -> ${P}.c
-	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${P}.c
-"
+SRC_URI="http://github.com/downloads/slonopotamus/n8x0-overlay/${P}.c"
 IUSE=''
 
-DEPEND='
-'
-RDEPEND='
-	sys-apps/nit-bootmenu-compat
-'
+DEPEND=''
+RDEPEND='sys-apps/nit-bootmenu-compat'
 
 S="${WORKDIR}"
 

@@ -1,5 +1,5 @@
 DESCRIPTION="Console keymap modifier for Nokia N810"
-HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
+HOMEPAGE="http://github.com/slonopotamus/n8x0-overlay"
 LICENSE="as-is"
 
 SRC_URI=""
@@ -8,9 +8,7 @@ KEYWORDS="~arm"
 
 IUSE=""
 
-RDEPEND="
-	sys-apps/kbd
-"
+RDEPEND="sys-apps/kbd"
 
 S="${WORKDIR}"
 

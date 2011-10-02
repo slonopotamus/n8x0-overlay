@@ -4,7 +4,7 @@
 
 inherit eutils
 
-SRC_URI="http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${PN}_${PV}.tar.gz"
+SRC_URI="http://github.com/downloads/slonopotamus/n8x0-overlay/${PN}_${PV}.tar.gz"
 KEYWORDS="arm"
 SLOT="0"
 IUSE=""
