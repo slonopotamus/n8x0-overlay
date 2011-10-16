@@ -1,3 +1,4 @@
 # Tested
 -kde
 -v4l2
+-policykit
