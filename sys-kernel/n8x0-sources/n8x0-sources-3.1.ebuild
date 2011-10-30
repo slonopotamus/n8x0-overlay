@@ -17,5 +17,5 @@ SRC_URI="${KERNEL_URI}"
 
 src_prepare() {
 	EPATCH_SOURCE="${FILESDIR}/${PV}/openwrt-patches" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
-	[ -d "${FILESDIR}/gentoo-patches" ] && EPATCH_SOURCE="${FILESDIR}/${PV}/gentoo-patches" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
+	[ -d "${FILESDIR}/${PV}/gentoo-patches" ] && EPATCH_SOURCE="${FILESDIR}/${PV}/gentoo-patches" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
 }
