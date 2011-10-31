@@ -1,0 +1,24 @@
+diff -ur a/etc/init.d/nit-boot-basics b/etc/init.d/nit-boot-basics
+--- a/etc/init.d/nit-boot-basics	2011-10-31 14:12:53.156628227 -0400
++++ b/etc/init.d/nit-boot-basics	2011-10-31 14:15:49.823567754 -0400
+@@ -3,6 +3,7 @@
+ description="Adjusts NIT kernel parameters for better powersaving."
+ 
+ depend() {
++	need retutime
+ 	after bootmisc
+ }
+ 
+diff -ur a/linuxrc b/linuxrc
+--- a/linuxrc	2011-10-31 14:12:53.115628238 -0400
++++ b/linuxrc	2011-10-31 14:15:49.783567775 -0400
+@@ -13,8 +13,7 @@
+ 
+ echo "Pushing the BT address"
+ /usr/bin/bt-cal `/usr/sbin/bootstate`
+-/usr/bin/retutime -i || true
+ 
+ cd $ROOT_PLACE
+ pivot_root . mnt/initfs
+-exec /usr/bin/chroot . /sbin/init <dev/console >dev/console 2>&1
++exec /sbin/init <dev/console >dev/console 2>&1
