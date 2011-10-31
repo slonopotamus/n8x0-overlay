@@ -12,10 +12,12 @@ DESCRIPTION="${PN} wifi driver"
 SRC_URI="
 	http://repository.maemo.org/pool/maemo4.1/free/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz
 	http://repository.maemo.org/pool/diablo/free/c/${MY_PN}/${MY_PN}_${PV}-1.tar.gz
+	http://github.com/downloads/slonopotamus/n8x0-overlay/${MY_PN}_${PV}-1.tar.gz
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${MY_PN}_${PV}-1.tar.gz
 
 	we-18? (
 		http://trac.tspre.org/svn/deblet/!svn/bc/457/trunk/packages/main/${MY_PN}/patches/${WPA_PATCH}
+		http://github.com/downloads/slonopotamus/n8x0-overlay/${WPA_PATCH}
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${WPA_PATCH}
 	)
 "
