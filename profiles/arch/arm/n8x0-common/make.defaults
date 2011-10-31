@@ -6,5 +6,5 @@ CFLAGS="-O2 -pipe ${MARCH_TUNE} -fomit-frame-pointer"
 CXXFLAGS="${CFLAGS}"
 
 USE="${USE} alsa bluetooth -fortran tslib v4l2 wifi X"
-VIDEO_CARDS="fbdev"
+VIDEO_CARDS="omapfb fbdev"
 INPUT_DEVICES="evdev keyboard tslib"
