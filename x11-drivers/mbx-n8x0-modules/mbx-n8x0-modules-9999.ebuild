@@ -11,9 +11,7 @@ SLOT="0"
 KEYWORDS="~arm"
 IUSE=""
 
-RDEPEND="
-	virtual/modutils
-"
+RDEPEND="sys-apps/modutils"
 DEPEND="${RDEPEND}
 	sys-apps/sed
 	virtual/linux-sources

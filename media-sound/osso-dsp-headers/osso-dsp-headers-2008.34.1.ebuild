@@ -4,7 +4,7 @@
 
 uPN="${PN}-rx-44"
 SRC_URI="http://repository.maemo.org/pool/diablo/non-free/o/osso-dsp-modules-rx-44/${uPN}_${PV}_all.deb"
-KEYWORDS="~arm"
+KEYWORDS="arm"
 SLOT="0"
 LICENSE="as-is"
 DESCRIPTION="DSP headers for OSSO Multimedia framework"
