@@ -8,6 +8,10 @@ ETYPE="sources"
 inherit kernel-2 eutils versionator
 detect_version
 
+DEPEND="${DEPEND}
+	<sys-devel/make-3.82
+"
+
 MY_PN="kernel-source-diablo"
 MY_P="${MY_PN}_${PV}"
 MY_PATCH="${MY_P}-200842maemo1.diff.gz"
