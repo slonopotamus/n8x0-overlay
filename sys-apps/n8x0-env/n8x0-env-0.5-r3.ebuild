@@ -7,6 +7,8 @@ EAPI=4
 IUSE="alsa bluetooth cx3110x gps internalgps nokia-osso-linux stlc45xx wifi +wifi-calibrate X keyboard"
 REQUIRED_USE="
 	gps? ( || ( internalgps bluetooth ) )
+	nokia-osso-linux? ( cx3110x )
+	!cx3110x? ( stlc45xx )
 "
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
@@ -38,13 +40,7 @@ RDEPEND="
 			net-wireless/stlc4550-firmware
 		)
 		net-wireless/wireless-tools
-		!stlc45xx? (
-			net-wireless/cx3110x
-		)
 		cx3110x? (
-			net-wireless/cx3110x
-		)
-		nokia-osso-linux? (
 			net-wireless/cx3110x
 		)
 		stlc45xx? (
