@@ -33,8 +33,14 @@ RDEPEND="
 	)
 
 	wifi? (
-		net-wireless/nokia-n8x0-firmware[wifi]
+		|| (
+			net-wireless/nokia-n8x0-firmware[wifi]
+			net-wireless/stlc4550-firmware
+		)
 		net-wireless/wireless-tools
+		!stlc45xx? (
+			net-wireless/cx3110x
+		)
 		cx3110x? (
 			net-wireless/cx3110x
 		)

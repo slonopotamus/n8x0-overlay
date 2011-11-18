@@ -28,8 +28,19 @@ SLOT="0"
 KEYWORDS="arm"
 IUSE="debug +udev +we-18"
 
-DEPEND="sys-kernel/diablo-sources"
-RDEPEND="net-wireless/nokia-n8x0-firmware[wifi]"
+DEPEND="virtual/linux-sources"
+RDEPEND="
+	udev? ( sys-fs/udev )
+	|| (
+		net-wireless/nokia-n8x0-firmware[wifi]
+		net-wireless/stlc4550-firmware
+		net-wireless/stlc4560-firmware
+	)
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.13.14
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.22.0
+	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.23
+	!=net-wireless/stlc4560-firmware-2.13.12.0.9910.5.2
+"
 
 S="${WORKDIR}/${MY_PN}-${PV}/src"
 
