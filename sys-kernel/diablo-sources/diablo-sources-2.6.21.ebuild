@@ -11,6 +11,7 @@ detect_version
 DEPEND="${DEPEND}
 	<sys-devel/make-3.82
 "
+RDEPEND=""
 
 MY_PN="kernel-source-diablo"
 MY_P="${MY_PN}_${PV}"

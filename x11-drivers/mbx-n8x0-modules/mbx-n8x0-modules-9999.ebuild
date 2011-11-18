@@ -1,6 +1,6 @@
 EGIT_REPO_URI="git://gitorious.org/mbx-n8x0/mbx-n8x0-modules.git"
 
-inherit linux-mod git
+inherit linux-mod git-2
 
 DESCRIPTION="OpenGL ES acceleration for Nokia N8x0: kernel half"
 HOMEPAGE="http://gitorious.org/mbx-n8x0"
@@ -11,9 +11,7 @@ SLOT="0"
 KEYWORDS="~arm"
 IUSE=""
 
-RDEPEND="
-	virtual/modutils
-"
+RDEPEND="sys-apps/modutils"
 DEPEND="${RDEPEND}
 	sys-apps/sed
 	virtual/linux-sources
