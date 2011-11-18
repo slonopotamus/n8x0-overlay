@@ -18,7 +18,7 @@ SRC_URI="
 	we-18? (
 		http://trac.tspre.org/svn/deblet/!svn/bc/457/trunk/packages/main/${MY_PN}/patches/${WPA_PATCH}
 		http://github.com/downloads/slonopotamus/n8x0-overlay/${WPA_PATCH}
-	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${WPA_PATCH}
+		http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${WPA_PATCH}
 	)
 "
 LICENSE="GPL-2"
@@ -28,19 +28,8 @@ SLOT="0"
 KEYWORDS="arm"
 IUSE="debug +udev +we-18"
 
-DEPEND="virtual/linux-sources"
-RDEPEND="
-	udev? ( sys-fs/udev )
-	|| (
-		net-wireless/nokia-n8x0-firmware[wifi]
-		net-wireless/stlc4550-firmware
-		net-wireless/stlc4560-firmware
-	)
-	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.13.14
-	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.22.0
-	!=net-wireless/stlc4560-firmware-2.13.0.0.9910.23
-	!=net-wireless/stlc4560-firmware-2.13.12.0.9910.5.2
-"
+DEPEND="sys-kernel/diablo-sources"
+RDEPEND="net-wireless/nokia-n8x0-firmware[wifi]"
 
 S="${WORKDIR}/${MY_PN}-${PV}/src"
 
