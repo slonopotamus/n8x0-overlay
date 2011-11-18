@@ -16,6 +16,5 @@ HOMEPAGE="http://github.com/slonopotamus/n8x0-overlay"
 SRC_URI="${KERNEL_URI}"
 
 src_prepare() {
-	EPATCH_SOURCE="${FILESDIR}/${PV}/openwrt-patches" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
-	[ -d "${FILESDIR}/${PV}/gentoo-patches" ] && EPATCH_SOURCE="${FILESDIR}/${PV}/gentoo-patches" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
+	EPATCH_SOURCE="${FILESDIR}/${PV}" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
 }
