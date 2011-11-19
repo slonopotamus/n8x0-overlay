@@ -1,17 +1,17 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header$
 
 EAPI=2
 
-IUSE="alsa bluetooth cx3110x gps nokia-osso-linux stlc45xx wifi +wifi-calibrate X keyboard"
+IUSE="alsa bluetooth bootmenu cx3110x gps nokia-osso-linux stlc45xx wifi +wifi-calibrate X keyboard"
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
 HOMEPAGE="http://slonopotamus.org/gentoo-on-n8x0"
 SLOT="0"
 KEYWORDS="arm"
 RDEPEND="
-	sys-apps/nit-bootmenu-compat
+	bootmenu? ( sys-apps/nit-bootmenu-compat )
 	gps? ( sci-geosciences/gps5300driver )
 	keyboard? ( sys-apps/kbd[512keys] )
 
