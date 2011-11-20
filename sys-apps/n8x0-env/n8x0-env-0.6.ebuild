@@ -4,11 +4,11 @@
 
 EAPI=4
 
-IUSE="alsa bluetooth bootmenu cx3110x gps internalgps nokia-osso-linux stlc45xx wifi +wifi-calibrate X keyboard"
+IUSE="alsa bluetooth bootmenu cx3110x gps internalgps nokia-osso-linux p54prism stlc45xx wifi +wifi-calibrate X keyboard"
 REQUIRED_USE="
 	gps? ( || ( internalgps bluetooth ) )
 	nokia-osso-linux? ( cx3110x )
-	!cx3110x? ( stlc45xx )
+	wifi? ( || ( cx3110x stlc45xx p54prism ) )
 "
 LICENSE="GPL-2"
 DESCRIPTION="Meta-package bringing minimal needed software to operate on Nokia N8x0 tablets"
