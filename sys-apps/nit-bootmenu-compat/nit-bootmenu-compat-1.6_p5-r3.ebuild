@@ -9,7 +9,7 @@ SRC_URI="
 	http://github.com/downloads/slonopotamus/n8x0-overlay/${PN}_${PV/_p/mer}.tar.gz
 	http://luke.dashjr.org/programs/gentoo-n8x0/distfiles/${PN}_${PV/_p/mer}.tar.gz
 "
-KEYWORDS="arm"
+KEYWORDS="~arm"
 SLOT="0"
 LICENSE="BSD"
 HOMEPAGE="http://wiki.maemo.org/Mer"
@@ -23,12 +23,14 @@ src_unpack() {
 	cd "${S}"
 	epatch "${FILESDIR}/gentoofy.patch"
 	epatch "${FILESDIR}/var_nokia.patch"
+	epatch "${FILESDIR}/r3.patch"
 }
 
 src_install() {
 	doins linuxrc
 	dodir /var/run/nokia/
 	doinitd etc/init.d/nit-boot-basics
+	newinitd "${FILESDIR}/retutime.initd" retutime
 }
 
 pkg_postinst() {

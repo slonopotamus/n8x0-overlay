@@ -1,0 +1,52 @@
+#!/sbin/runscript
+# Copyright (c) 2007-2008 Roy Marples <roy@marples.name>
+# All rights reserved. Released under the 2-clause BSD license.
+
+extra_commands="save show"
+
+description="Sets the local clock to UTC or Local Time." 
+description_save="Saves the current time in the BIOS."
+description_show="Displays the current time in the BIOS."
+
+depend()
+{
+	provide clock
+	before *
+	keyword -openvz -prefix -uml -vserver -xenu -lxc
+}
+
+start()
+{
+	local retval=0 errstr=""
+
+	ebegin "Setting system clock using retutime"
+	
+	chroot /mnt/initfs retutime -i
+	retval=$?
+	
+	eend $retval "Failed to set the system clock"
+
+	return 0
+}
+
+stop()
+{
+	ebegin "Setting retutime using the system clock"
+
+	chroot /mnt/initfs retutime -I
+	retval=$?
+
+	eend $retval "Failed to sync clocks" 
+}
+
+save()
+{
+	stop
+}
+
+show()
+{
+	chroot /mnt/initfs retutime -t
+	echo
+}
+
