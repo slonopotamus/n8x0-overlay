@@ -1,11 +1,14 @@
-<?xml version="1.0"?>
-<layman>
-  <overlay name="n8x0"
-    type="git"
-    src="git://github.com/slonopotamus/n8x0-overlay.git"
-    contact="luke_n8x0_overlay@dashjr.org"
-    status="unofficial">
-    <link>http://github.com/slonopotamus/n8x0-overlay</link>
-    <description>Packages to support Nokia Internet Tablets (N8x0)</description>
-  </overlay>
-</layman>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+	<repo quality="stable" status="unofficial">
+		<name><![CDATA[n8x0]]></name>
+		<description lang="en"><![CDATA[Packages to support Nokia Internet Tablets (N8x0)]]></description>
+		<homepage>http://github.com/slonopotamus/n8x0-overlay</homepage>
+		<owner type="person">
+			<email>luke_n8x0_overlay@dashjr.org</email>
+			<name><![CDATA[Luke-Jr]]></name>
+		</owner>
+		<source type="git">git://gitorious.org/handheld-gentoo-overlays/n8x0.git</source>
+	</repo>
+</repositories>
